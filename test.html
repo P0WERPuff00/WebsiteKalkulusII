@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Calculzy - Kalkulus Modern</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <style>
+    /* [CSS content here] */
+    /* Paste all your CSS code from earlier inside here */
+  </style>
+</head>
+<body>
+<div class="diffeq-container">
+  <!-- Visualization Canvas -->
+  <div class="diffeq-visual">
+    <div class="coordinate-plane">
+      <div class="x-axis"></div>
+      <div class="y-axis"></div>
+      <div class="grid-lines"></div>
+      <div class="slope-field"></div>
+      <div class="solution-curve"></div>
+      <div class="initial-point"></div>
+    </div>
+  </div>
+  
+  <!-- Equation Display -->
+  <div class="equation-display">
+    <span class="dy">dy</span><span class="dx">dx</span> 
+    <span class="equals">=</span> 
+    <span class="function">x - y</span>
+  </div>
+  
+  <!-- Interactive Controls -->
+  <div class="diffeq-controls">
+    <div class="initial-condition">
+      y(<input type="number" class="x-value" value="0">) = 
+      <input type="number" class="y-value" value="1">
+    </div>
+    <button class="control-btn toggle-slope">Slope Field</button>
+    <button class="control-btn animate-btn">▶ Animate</button>
+  </div>
+</div>
+
+<style>
+  /* Base Styles */
+  :root {
+    --math-blue: #4fc3f7;
+    --math-pink: #ff4081;
+    --math-green: #64ffda;
+    --bg-dark: #121212;
+    --grid-color: rgba(255,255,255,0.1);
+  }
+  
+  body {
+    margin: 0;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: var(--bg-dark);
+    font-family: 'Segoe UI', sans-serif;
+  }
+  
+  .diffeq-container {
+    width: 100%;
+    max-width: 450px;
+    height: 400px;
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    background: linear-gradient(145deg, #1e1e1e 0%, #121212 100%);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  }
+  
+  /* Visualization Area */
+  .diffeq-visual {
+    width: 100%;
+    height: 60%;
+    position: relative;
+  }
+  
+  .coordinate-plane {
+    position: absolute;
+    width: 80%;
+    height: 80%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  .x-axis, .y-axis {
+    position: absolute;
+    background: var(--math-blue);
+  }
+  
+  .x-axis {
+    width: 100%;
+    height: 1px;
+    bottom: 50%;
+    box-shadow: 0 0 5px var(--math-blue);
+  }
+  
+  .y-axis {
+    width: 1px;
+    height: 100%;
+    left: 50%;
+    box-shadow: 0 0 5px var(--math-blue);
+  }
+  
+  .grid-lines {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: 
+      linear-gradient(to right, var(--grid-color) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--grid-color) 1px, transparent 1px);
+    background-size: 20px 20px;
+  }
+  
+  /* Slope Field */
+  .slope-field {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"><line x1="8" y1="10" x2="12" y2="10" stroke="%234fc3f7" stroke-width="1"/></svg>');
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  
+  /* Solution Curve */
+  .solution-curve {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(ellipse at center, 
+              rgba(255, 64, 129, 0.2) 0%, 
+              transparent 70%);
+    clip-path: path('M10,90 Q50,50 90,30');
+  }
+  
+  .initial-point {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: var(--math-green);
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 10px var(--math-green);
+  }
+  
+  /* Equation Display */
+  .equation-display {
+    position: absolute;
+    top: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1.5rem;
+    color: white;
+    display: flex;
+    align-items: center;
+    background: rgba(0,0,0,0.5);
+    padding: 8px 16px;
+    border-radius: 30px;
+    border: 1px solid var(--grid-color);
+  }
+  
+  .dy, .dx {
+    color: var(--math-blue);
+    font-size: 1.2rem;
+  }
+  
+  .dx {
+    margin-left: -5px;
+  }
+  
+  .equals {
+    margin: 0 5px;
+    color: white;
+  }
+  
+  .function {
+    color: var(--math-pink);
+  }
+  
+  /* Controls */
+  .diffeq-controls {
+    position: absolute;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    width: 90%;
+  }
+  
+  .initial-condition {
+    display: flex;
+    align-items: center;
+    color: white;
+    font-family: 'Courier New', monospace;
+    background: rgba(0,0,0,0.5);
+    padding: 6px 10px;
+    border-radius: 6px;
+    border: 1px solid var(--grid-color);
+  }
+  
+  .x-value, .y-value {
+    width: 30px;
+    background: transparent;
+    border: 1px solid var(--math-blue);
+    border-radius: 3px;
+    color: white;
+    text-align: center;
+    margin: 0 3px;
+    padding: 2px;
+  }
+  
+  .y-value {
+    border-color: var(--math-green);
+  }
+  
+  .control-btn {
+    padding: 6px 12px;
+    background: rgba(79, 195, 247, 0.2);
+    color: white;
+    border: 1px solid var(--math-blue);
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+  }
+  
+  .control-btn:hover {
+    background: rgba(79, 195, 247, 0.4);
+  }
+  
+  /* Active States */
+  .show-slope .slope-field {
+    opacity: 0.5;
+  }
+  
+  .animating .solution-curve {
+    animation: drawPath 3s ease-in-out;
+  }
+  
+  /* Animations */
+  @keyframes drawPath {
+    from { clip-path: path('M10,90 Q10,90 10,90'); }
+    to { clip-path: path('M10,90 Q50,50 90,30'); }
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 425px) {
+    .diffeq-container {
+      height: 380px;
+    }
+    
+    .equation-display {
+      font-size: 1.3rem;
+      padding: 6px 12px;
+    }
+    
+    .diffeq-controls {
+      bottom: 10px;
+      gap: 6px;
+    }
+    
+    .initial-condition {
+      font-size: 0.9rem;
+      padding: 4px 8px;
+    }
+    
+    .control-btn {
+      padding: 5px 10px;
+      font-size: 0.8rem;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const container = document.querySelector('.diffeq-container');
+    const toggleSlopeBtn = document.querySelector('.toggle-slope');
+    const animateBtn = document.querySelector('.animate-btn');
+    const xValueInput = document.querySelector('.x-value');
+    const yValueInput = document.querySelector('.y-value');
+    const initialPoint = document.querySelector('.initial-point');
+    const solutionCurve = document.querySelector('.solution-curve');
+    
+    // Toggle slope field visibility
+    toggleSlopeBtn.addEventListener('click', function() {
+      container.classList.toggle('show-slope');
+      this.textContent = container.classList.contains('show-slope') ? 
+        'Hide Slope' : 'Show Slope';
+    });
+    
+    // Animate solution curve
+    animateBtn.addEventListener('click', function() {
+      container.classList.add('animating');
+      solutionCurve.style.animation = 'none';
+      setTimeout(() => {
+        solutionCurve.style.animation = '';
+      }, 10);
+      
+      setTimeout(() => {
+        container.classList.remove('animating');
+      }, 3000);
+    });
+    
+    // Update initial condition point
+    function updateInitialPoint() {
+      const x = parseFloat(xValueInput.value) || 0;
+      const y = parseFloat(yValueInput.value) || 1;
+      
+      // Map to coordinate system (simplified)
+      const xPos = 50 + (x * 10);
+      const yPos = 50 - (y * 10);
+      
+      initialPoint.style.left = `${xPos}%`;
+      initialPoint.style.top = `${yPos}%`;
+      
+      // Update solution curve (simplified)
+      solutionCurve.style.clipPath = `path('M${xPos},${yPos} Q50,50 ${xPos+40},${yPos-20}')`;
+    }
+    
+    xValueInput.addEventListener('change', updateInitialPoint);
+    yValueInput.addEventListener('change', updateInitialPoint);
+    
+    // Initialize
+    updateInitialPoint();
+  });
+</script>
+</body>
+</html>

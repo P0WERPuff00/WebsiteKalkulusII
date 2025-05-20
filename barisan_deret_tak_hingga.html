@@ -1,0 +1,1386 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <title>Barisan Deret Tak Hingga | Calculzy</title>
+  <style>
+    [data-theme="light"] .logo {
+      color: black;
+    }
+
+
+
+    [data-theme="light"] .nav-links a {
+      color: black;
+    }
+ :root {
+    --primary: #6366f1;
+    --secondary: #8b5cf6;
+    --accent: #ec4899;
+    --textvisual: #e2e8f0;
+    --bg-dark: #0f172a;
+    --bg-darker: #020617;
+  }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--dark);
+      color: var(--text);
+      transition: all 0.3s ease;
+      line-height: 1.6;
+    }
+
+
+
+    .theme-toggle {
+      background: none;
+      border: none;
+      color: var(--lighter);
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+
+    .theme-toggle:hover {
+      transform: rotate(30deg);
+    }
+
+    .material-container {
+      max-width: 1200px;
+      margin: 0rem auto 4rem;
+    }
+
+    .material-header {
+      text-align: center;
+      margin-bottom: 4rem;
+      position: relative;
+    }
+
+    .material-header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.8rem;
+      margin-bottom: 1.5rem;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .material-header p {
+      font-size: 1.1rem;
+      color: var(--gray);
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+
+
+
+
+
+
+    .material-content {
+display: grid
+;
+    grid-template-columns: 1fr 70px;
+    gap: 12rem;
+    margin-left: -80px;
+    }
+
+
+
+.sidebar {
+  position: sticky;
+  top: 120px;
+  height: fit-content;
+  margin-left: -125px; /* tambahkan ini agar tidak nempel ke tepi kiri grid */
+  width: 300px;
+}
+
+
+    .sidebar-menu {
+      padding: 1.5rem;
+      background-color: var(--card);
+      backdrop-filter: blur(10px);
+      border-radius: 1rem;
+      padding: 1.5rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .sidebar-menu h3 {
+      font-size: 1.2rem;
+      margin-bottom: 1.5rem;
+      color: var(--primary-light);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .sidebar-menu ul {
+      list-style: none;
+    }
+
+    .sidebar-menu li {
+      margin-bottom: 0.8rem;
+    }
+
+    .sidebar-menu a {
+      color: var(--text);
+      text-decoration: none;
+      transition: color 0.3s;
+      display: block;
+      padding: 0.5rem 0;
+      border-left: 3px solid transparent;
+    }
+
+    .sidebar-menu a:hover, .sidebar-menu a.active {
+      color: var(--primary);
+      border-left: 3px solid var(--primary);
+    }
+
+    .section {
+      margin-bottom: 3rem;
+    }
+
+    .section h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      margin-bottom: 1.5rem;
+      color: var(--lighter);
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .section h2 i {
+      color: var(--primary);
+    }
+
+    .section p {
+      margin-bottom: 1.5rem;
+      line-height: 1.8;
+    }
+
+    .formula {
+      background-color: rgba(99, 102, 241, 0.1);
+      border-left: 4px solid var(--primary);
+      padding: 1.5rem;
+      border-radius: 0 0.5rem 0.5rem 0;
+      margin: 1.5rem 0;
+font-family: 'Poppins', sans-serif;
+      font-size: 1.1rem;
+      overflow-x: auto;
+    }
+
+    .example {
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+    }
+
+
+
+
+
+
+
+
+    .example h3 {
+      color: var(--primary-light);
+      margin-bottom: 1rem;
+      font-size: 1.2rem;
+    }
+
+    .visualization {
+      background-color: rgba(15, 23, 42, 0.5);
+      border-radius: 0.5rem;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+      text-align: center;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .visualization img {
+      max-width: 100%;
+      border-radius: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .visualization p {
+      font-size: 0.9rem;
+      color: white;
+    }
+
+    .btn-anim {
+      padding: 0.8rem 1.8rem;
+      font-size: 1rem;
+      font-weight: 500;
+      border: none;
+      border-radius: 50px;
+      background: var(--gradient);
+      color: white;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      z-index: 1;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+
+    .btn-anim:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 30px rgba(99, 102, 241, 0.4);
+    }
+
+    .btn-anim::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: 0.5s;
+      z-index: -1;
+    }
+
+    .btn-anim:hover::before {
+      left: 100%;
+    }
+
+    .navigation-buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 3rem;
+      padding-top: 2rem;
+    }
+
+    @media (max-width: 992px) {
+      .material-content {
+        grid-template-columns: 1fr;
+      }
+      
+      .sidebar {
+        position: static;
+        order: -1;
+        margin-bottom: 2rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .material-header h1 {
+        font-size: 2.2rem;
+      }
+      
+      .control-btn{
+        font-size: 0.7rem!important;
+      }
+      .equation-display{
+        font-size: 1rem!important;
+      }
+      .section h2 {
+        font-size: 1.5rem;
+      }
+    }
+  /* Base Styles */
+  /* Base Styles */
+  :root {
+    --primary: #6366f1;
+    --accent: #f472b6;
+    --textvisual: #e2e8f0;
+    --bg-dark: #0f172a;
+  }
+  
+  .diff-eq-container {
+    width: 700px;
+    height: 500px;
+    position: relative;
+    border-radius: 12px;
+background: rgb(15 23 42 / 86%);
+      box-shadow: 0 0 50px rgba(127, 0, 255, 0.3);
+    overflow: hidden;
+  }
+  
+  .math-universe {
+    width: 100%;
+    height: 100%;
+    position: relative;
+  }
+  
+  /* Coordinate System */
+  .coordinate-system {
+    position: absolute;
+    width: 80%;
+    height: 60%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  .grid-lines {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: 
+      linear-gradient(to right, rgba(226, 232, 240, 0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(226, 232, 240, 0.05) 1px, transparent 1px);
+    background-size: 10% 10%;
+  }
+  
+  .x-axis, .y-axis {
+    position: absolute;
+    background-color: rgba(226, 232, 240, 0.3);
+  }
+  
+  .x-axis {
+    width: 100%;
+    height: 1px;
+    bottom: 50%;
+  }
+  
+  .y-axis {
+    width: 1px;
+    height: 100%;
+    left: 50%;
+  }
+  
+  /* Slope Field */
+  .slope-field {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: 
+      repeating-linear-gradient(to right, transparent 0 9%, rgba(255,255,255,0.02) 10%),
+      repeating-linear-gradient(to bottom, transparent 0 9%, rgba(255,255,255,0.02) 10%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  
+  .show-slope .slope-field {
+    opacity: 1;
+  }
+  
+  /* Solution Curves */
+  .solution-curves {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+  }
+  
+  .curve {
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 1000;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  
+  .c1 { stroke: #a5b4fc; }
+  .c2 { stroke: #86efac; }
+  .c3 { stroke: #f472b6; }
+  
+  .show-solutions .curve {
+    opacity: 0.8;
+    animation: draw 4s linear forwards;
+  }
+  
+  /* Particle */
+  .particle-system {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    top: 50%;
+    left: 10%;
+    transform: translate(-50%, -50%);
+    animation: particleMove 5s infinite linear;
+  }
+  
+  .particle-core {
+    width: 100%;
+    height: 100%;
+    background: #86efac;
+    border-radius: 50%;
+    box-shadow: 0 0 8px #86efac;
+  }
+  
+  /* Equation Display */
+  .equation-display {
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1.8rem;
+    color: white;
+    background: rgba(15, 23, 42, 0.7);
+    padding: 0.5rem 1.2rem;
+    border-radius: 30px;
+    border: 1px solid rgba(226, 232, 240, 0.1);
+    white-space: nowrap;
+  }
+  
+  .dy, .dx { color: #a5b4fc; }
+  .slash, .equals { color: rgba(226, 232, 240, 0.7); }
+  .function { color: #f472b6; }
+  
+  /* Initial Condition */
+  .initial-condition {
+    position: absolute;
+    top: 25%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1rem;
+    color: white;
+    background: rgba(15, 23, 42, 0.7);
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+    border: 1px solid rgba(226, 232, 240, 0.1);
+  }
+  
+  .x-value { color: #f472b6; }
+  .y-value { color: #86efac; }
+  
+  /* Control Panel */
+  .control-panel {
+    position: absolute;
+    bottom: 5%;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    background: rgba(15, 23, 42, 0.7);
+    padding: 0.6rem 1rem;
+    border-radius: 8px;
+    border: 1px solid rgba(226, 232, 240, 0.1);
+    margin: auto;
+    justify-content: center;
+  }
+  
+  .control-btn {
+    padding: 0.4rem 0.8rem;
+    background: rgba(99, 102, 241, 0.2);
+    color: var(--textvisual);
+    border: 1px solid var(--primary);
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    min-width: 80px;
+    transition: all 0.2s ease;
+  }
+  
+  .control-btn:hover {
+    background: rgba(99, 102, 241, 0.3);
+  }
+  
+  /* Animations */
+  @keyframes draw {
+    to { stroke-dashoffset: 0; }
+  }
+  
+  @keyframes particleMove {
+    0% { left: 10%; top: 50%; }
+    25% { left: 30%; top: 30%; }
+    50% { left: 50%; top: 50%; }
+    75% { left: 70%; top: 40%; }
+    100% { left: 90%; top: 50%; }
+  }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <a href="index.html" class="logo">Calculzy</a>
+    <div class="nav-links">
+      <a href="index.html">Beranda</a>
+                            <a class="dropdown-btn">Daftar Isi</a>
+
+            <div class="dropdown">
+                <div class="dropdown-content" id="desktopDropdown">
+                    <a href="#pengantar">Yuk Kenalan dengan Barisan dan Deret!?</a>
+                    <a href="#pengertianDeret">Apa itu Deret?</a>
+                    <a href="#notasiSigma">Notasi Sigma</a>
+                    <a href="#BarisanGeo">Barisan Geometri dan Deret Geometri</a>
+                    <a href="#DeretTakHingga">Deret Tak Hingga</a>
+                    <a href="#DeretAbsolut">Deret Absolut</a>
+                     <a href="#DeretKonvergenKondisional">Deret Konvergen Kondisional</a>
+                    <a href="#KonvergendanDivergen">Konvergen dan Divergen</a>
+                    <a href="#DeretGeometriTakHingga">Deret Geometri Tak Hingga</a>
+                    <a href="#TesKonvergensi">Tes Konvergensi</a>
+                    <a href="#video">Video Pembelajaran</a>
+                </div>
+            </div>
+                  <button id="themeToggle" class="theme-toggle">
+        <i class="fas fa-moon"></i>
+      </button>
+    </div>
+  </nav>
+
+    <div class="material-header hero-section">
+
+  <h1 class="margin-top-70" data-aos="fade" data-aos-delay="50">BAB III: Barisan dan Deret Tak Hingga</h1>
+  <div class="flex-center">
+<div class="diff-eq-container">
+  <div class="math-universe">
+    <!-- Simplified Coordinate System -->
+    <div class="coordinate-system">
+      <div class="grid-lines"></div>
+      <div class="x-axis"></div>
+      <div class="y-axis"></div>
+    </div>
+    
+    <!-- Slope Field -->
+    <div class="slope-field"></div>
+    
+    <!-- Solution Curves -->
+    <svg class="solution-curves" viewBox="0 0 100 100" preserveAspectRatio="none">
+      <path class="curve c1" d="M0,50 Q25,30 50,35 T100,30"></path>
+      <path class="curve c2" d="M0,60 Q25,40 50,45 T100,40"></path>
+      <path class="curve c3" d="M0,40 Q25,20 50,25 T100,20"></path>
+    </svg>
+    
+    <!-- Particle -->
+    <div class="particle-system">
+      <div class="particle-core"></div>
+    </div>
+    
+    <!-- Equation Display -->
+    <div class="equation-display">
+      <span class="dy">dy</span><span class="slash">/</span><span class="dx">dx</span>
+      <span class="equals"> = </span>
+      <span class="function">x - y</span>
+    </div>
+    
+    <!-- Initial Condition -->
+    <div class="initial-condition">
+      y(<span class="x-value">0</span>) = <span class="y-value">C</span>
+    </div>
+    
+    <!-- Compact Controls -->
+
+  </div>
+</div>
+
+</div>
+    </div>
+            <div class="particles" id="particles"></div>
+
+<div class="material-container">
+    <div class="material-content">
+                 
+
+      <div data-aos="fade-up" class="main-content">
+        <section id="pengantar" class="section">
+          <h2><i class="fas fa-book-open"></i>Yuk Kenalan dengan Barisan dan Deret!?
+</h2>
+          <p>Barisan dan deret adalah dua konsep yang sangat penting dalam matematika. Barisan adalah urutan angka yang mengikuti pola tertentu, sedangkan deret adalah penjumlahan dari elemen-elemen dalam barisan tersebut.</p>
+          <p>Dalam bab ini, kita akan membahas tentang barisan dan deret tak hingga, yang merupakan konsep lanjutan dari barisan dan deret biasa. Kita akan belajar bagaimana cara menghitung jumlah dari barisan tak hingga dan bagaimana cara menentukan konvergensi atau divergensi dari deret tersebut.</p>
+        </section>
+
+      <section id="pengertian" class="section">
+          <h2><i class="fas fa-stream"></i>Apa itu Barisan?</h2>
+        <div class="example">
+          <p>Barisan adalah urutan bilangan berdasarkan pola tertentu. Contohnya:</p>
+          <p><em>1, 2, 3, 4, 5, ...</em> adalah barisan dengan pola naik 1.</p>
+
+          <p>Notasi umum barisan ditulis:</p>
+          <div class="formula">\( a_1, a_2, a_3, \dots, a_n \)</div>
+          <b>Artinya:</b>
+          <ul>
+            <li>\( a_1 \): suku pertama</li>
+            <li>\( a_2 \): suku kedua</li>
+            <li>\( \dots \)</li>
+            <li>\( a_n \): suku ke-n</li>
+          </ul>
+          <b>Contoh:</b>jika \( a_n = n \), maka barisannya adalah:
+          <br>
+          <code>1, 2, 3, 4, 5, ...</code>
+      
+
+          <p>Setelah memahami bentuk umum barisan, sekarang mari kita pelajari bentuk barisan yang ditentukan bukan secara langsung, 
+            tapi berdasarkan suku sebelumnya—yaitu <b>barisan rekursif</b>.</p>
+            <br>
+           <h3>a. Barisan Rekursif</h3><br>
+              <p><b>Barisan rekursif </b>adalah barisan di mana <strong>setiap suku tergantung pada suku sebelumnya</strong>. <b>Artinya</b>, untuk mengetahui suku ke-n, kita harus tahu dulu suku sebelumnya (yaitu suku ke-(n−1)). Dengan kata lain, kita tidak bisa langsung menghitung suku ke-5 misalnya, tanpa terlebih dahulu mengetahui suku ke-4, ke-3, dan seterusnya, sampai ke suku pertama.
+                Barisan jenis ini mengikuti pola berantai, di mana setiap suku saling terhubung. 
+                Itulah yang membuat barisan rekursif menarik dan berbeda dari barisan eksplisit (yang bisa langsung dihitung dengan satu rumus).</p>
+                <br>
+              <h3>Contoh:</h3>
+              <ul>
+                <li>\( a_1 = 2 \)</li>
+                <li>\( a_n = a_{n-1} + 3 \)</li>
+              </ul>
+              Maka:
+              <ul>
+                <li>\( a_1 = 2 \)</li>
+                <li>\( a_2 = a_1 + 3 = 5 \)</li>
+                <li>\( a_3 = a_2 + 3 = 8 \)</li>
+                <li>\( a_4 = a_3 + 3 = 11 \)</li>
+                <li>\( a_5 = a_4 + 3 = 14 \)</li>
+              </ul>
+              <br>
+              <p>Jadi, barisan tersebut adalah: 2, 5, 8, 11, 14, ...</p>
+            <br>
+      </section>
+
+            <section id="pengertianDeret" class="section">
+              <h2><i class="fas fa-square"></i>Apa itu Deret?</h2>
+            <div class="example">
+                <p>Deret adalah bentuk penjumlahan dari setiap suku dalam suatu barisan.
+                   Jika barisan hanya menyajikan elemen secara berurutan, maka deret melihat jumlah total dari elemen-elemen tersebut.</p>
+                <h3>Contoh:</h3>
+                <br>
+                Barisan:  1, 2, 3, 4, 5, ...<br>
+                Deret: 1 + 2 + 3 + 4 + 5 + ... <br>
+                <br>
+                Contoh penulisan bila kita pakai notasi sigma:
+                <br>
+                <div class="formula"> $$ \sum_{n=1}^{\infty} a_n $$</div>
+                Artinya: jumlah semua \( a_n \) dari \( n = 1 \) hingga tak hingga.
+                <br><br>
+                Misalnya, jika \( a_n = n \), maka:
+            </div>
+            </section>  
+             
+      <section id="notasiSigma" class="section">
+        <h2><i class="material-icons" style="font-size: 48px;">functions</i>Notasi Sigma</h2>
+        <div class="example">
+        <p>
+          Notasi sigma adalah simbol yang digunakan untuk menyatakan penjumlahan dari suatu deret. Simbol ini berasal dari huruf Yunani <strong>“sigma”</strong> (∑), yang berarti <em>jumlah</em> atau <em>penjumlahan</em>.
+        </p>
+    
+       <h3>Bentuk umum notasi sigma:</h3>
+        <div class="formula">$$ \sum_{i=m}^{n} u_i $$</div>
+        <h3>Keterangan:</h3>
+        <ul>
+          <li>\( \sum \): simbol sigma (penjumlahan)</li>
+          <li>\( i \): indeks penjumlahan</li>
+          <li>\( m \): batas bawah (nilai awal indeks)</li>
+          <li>\( n \): batas atas (nilai akhir indeks)</li>
+          <li>\( u_i \): bentuk umum atau ekspresi yang bergantung pada \( i \)</li>
+        </ul>
+        <br>
+        <p>
+          Artinya: jumlahkan semua nilai \( u_i \) mulai dari \( i = m \) hingga \( i = n \). Nilai \( m \) dan \( n \) harus berupa bilangan bulat, dan \( m \leq n \).
+        </p>
+        <h3>Contoh 1 :</h3>
+        <div class="formula">
+        <p>$$ \sum_{i=3}^{6} i $$</p>
+        <p>
+          Artinya: jumlahkan semua \( i \) mulai dari \( i = 3 \) sampai \( i = 6 \).
+        </p>
+        <p>
+          Maka:
+          $$ \sum_{i=3}^{6} i = 3 + 4 + 5 + 6 = 18 $$
+        </p>
+      </div>
+        <h3>Contoh 2 :</h3>
+        <div class="formula">
+        <p>$$ \sum_{i=1}^{4} (2i + 1) $$</p>
+        <p>
+          Artinya: jumlahkan semua \( (2i + 1) \) mulai dari \( i = 1 \) sampai \( i = 4 \).
+        </p>
+        <p>
+          Maka:
+          $$ \sum_{i=1}^{4} (2i + 1) = (2(1) + 1) + (2(2) + 1) + (2(3) + 1) + (2(4) + 1) = 3 + 5 + 7 + 9 = 24 $$
+        </p>
+      </div>
+        <h3>Contoh 3 :</h3>
+        <div class="formula">
+        <p>$$ \sum_{i=1}^{n} i^2 $$</p>
+        <p>
+          Artinya: jumlahkan semua \( i^2 \) mulai dari \( i = 1 \) sampai \( i = n \).
+        </p>
+        <p>
+          Maka:
+          $$ \sum_{i=1}^{n} i^2 = 1^2 + 2^2 + 3^2 + ... + n^2 $$
+        </p>
+      </div>
+    </div>
+</section>
+    <section id="BarisanGeo" class="section">
+        <h2><i class="fas fa-chart-line"></i>Barisan Geometri dan Deret Geometri</h2>
+    <div class="example">
+        <h2>1. Rumus Rasio (r) pada Barisan dan Deret Geometri</h2>
+
+          <p>
+            <strong>Rasio</strong> adalah nilai pengali tetap antara dua suku berurutan dalam barisan atau deret geometri. Dengan kata lain, rasio adalah faktor yang digunakan untuk mengalikan suatu suku agar menghasilkan suku berikutnya.
+          </p>
+      
+          <h3>Rumus Rasio:</h3>
+          
+          <div class="formula">$$ r = \frac{U_n}{U_{n-1}} $$</div>
+      
+          <ul>
+            <li>\( r \): rasio</li>
+            <li>\( U_n \): suku ke-n</li>
+            <li>\( U_{n-1} \): suku ke-(n−1)</li>
+          </ul>
+
+          <h3>Contoh:</h3>
+          <div class="formula">
+            <p>Diberikan barisan geometri:</p>
+            <p><code>1, 3, 9, 27, 81, …</code></p>
+        
+            <p>Suku pertama (\( a \)) dari barisan ini adalah:</p>
+            <p>
+              $$ a = 1 $$
+            </p>
+        
+            <p>Kita akan mencari rasio dengan menggunakan dua suku pertama:</p>
+            <p>
+              $$ r = \frac{U_2}{U_1} = \frac{3}{1} = 3 $$
+            </p>
+            <p><strong>Jadi, rasio dari barisan geometri tersebut adalah:</strong> <code>3</code>.</p>
+          </div>
+
+        <h2>2. Rumus Suku ke-n pada Barisan Geometri</h2>
+        <p>
+          \( U_n \) adalah suku ke-n dalam suatu barisan atau deret geometri. Untuk menghitung nilai suku ke-n, gunakan rumus berikut:
+        </p>
+        <div class="formula">$$ U_n = a \cdot r^{n-1} $$</div>
+        <h3>Keterangan:</h3>
+        <ul>
+          <li>\( U_n \): suku ke-n</li>
+          <li>\( a \): suku pertama</li>
+          <li>\( r \): rasio</li>
+          <li>\( n \): banyaknya suku</li>
+        </ul>
+        <h3>Contoh:</h3>
+      <div class="formula">
+        <p>Misalnya kita memiliki barisan geometri:</p>
+        <p><code>1, 3, 9, 27, 81, …</code></p>
+        <p>Suku pertama (\( a \)) adalah 1, dan rasio (\( r \)) adalah 3. Kita akan mencari suku ke-6 (\( U_6 \)):</p>
+         $$ U_6 = a \cdot r^{6-1} = 1 \cdot 3^5 = 3^5 = 243 $$
+        <p><strong>Jadi, suku ke-6 dari barisan tersebut adalah:</strong> <code>243</code>.</p>
+      </div>
+
+      <h2>3. Rumus Jumlah Suku ke-n (Sn) Barisan Geometri</h2>
+      <p>\( S_n \) adalah jumlah dari suku pertama hingga suku ke-n pada barisan geometri. Rumus umum untuk mencari jumlah suku ke-n adalah:</p>
+
+      <p><strong>Jika \( r > 1 \):</strong></p>
+      <div class="formula">$$ S_n = a \cdot \frac{r^n - 1}{r - 1} $$</div>
+
+      <p><strong>Jika \( r < 1 \):</strong></p>
+      <div class="formula">$$ S_n = a \cdot \frac{1 - r^n}{1 - r} $$</div>
+      <h3>Keterangan:</h3>
+      <ul>
+        <li>\( S_n \): jumlah n suku pertama</li>
+        <li>\( a \): suku pertama</li>
+        <li>\( r \): rasio</li>
+        <li>\( n \): banyaknya suku</li>
+      </ul>
+      <h3>Contoh:</h3>
+      <div class="formula"><p>Misalkan kita memiliki barisan geometri:</p>
+        <p><code>1, 3, 9, 27, 81, …</code></p>
+
+        <p>Suku pertama \( a = 1 \), dan rasio \( r = 3 \). Cari \( S_3 \) (jumlah 3 suku pertama):</p>
+
+        <p>
+          $$ S_3 = 1 \cdot \frac{3^3 - 1}{3 - 1} = \frac{27 - 1}{2} = \frac{26}{2} = 13 $$
+        </p>
+
+        <p><strong>Jadi, \( S_3 \) dari barisan tersebut adalah:</strong> <code>13</code>.</p>
+      </div>
+    </div>
+  </section>
+  <section id="BarisanTakHingga" class="section">
+       <h2><i class="fas fa-infinity"></i>Barisan Tak Hingga</h2>
+        <div class="example">
+            <p>Barisan tak hingga adalah barisan yang memiliki jumlah suku <strong>tak terbatas</strong>.</p>
+            <p>Contoh: jika \( a_n = \frac{1}{n} \), maka barisan tersebut adalah:</p>
+            <p>
+              $$ a_1 = 1,\ a_2 = \frac{1}{2},\ a_3 = \frac{1}{3},\ a_4 = \frac{1}{4},\ \dots $$
+            </p>
+            <h2>Limit Barisan</h2>
+              <p>Limit barisan digunakan untuk mengetahui nilai yang didekati oleh suku ke-\(n\) saat \(n\) menuju tak hingga.</p>
+              <ul>
+                <li>Jika \( \lim_{n \to \infty} a_n = L \), maka barisan <strong>konvergen</strong> ke \(L\).</li>
+                <li>Jika tidak menuju ke nilai tertentu, maka barisan <strong>divergen</strong>.</li>
+              </ul>
+              <h3>Contoh 1:</h3>
+              <div class="formula">$$ a_n = \frac{1}{n},\ \lim_{n \to \infty} a_n = 0 \Rightarrow \text{Konvergen ke } 0 $$</div>
+              
+              <h3>Contoh 2:</h3>
+              <div class="formula">$$ a_n = n,\ \lim_{n \to \infty} a_n = \infty \Rightarrow \text{Divergen} $$</div>
+              <h3>Contoh Soal:</h3>
+              <p>Tentukan nilai limit dari barisan berikut:</p>
+              <p>
+                \[
+                \lim_{n \to \infty} \frac{3n + 5}{2n + 7}
+                \]
+              </p>
+              <h3>Langkah-Langkah Penyelesaian:</h3>
+              
+              <ol>
+                <li><strong>Identifikasi bentuk barisan:</strong> <br>
+                <div class="formula"> Barisan berbentuk pecahan:
+                  \[
+                  a_n = \frac{3n + 5}{2n + 7}
+                  \] </div>
+                </li>
+             
+            
+                <li><strong>Bagi pembilang dan penyebut dengan pangkat tertinggi dari \( n \):</strong>
+                  <div class="formula"> \[\lim_{n \to \infty} \frac{3 + \frac{5}{n}}{2 + \frac{7}{n}}\]</div>
+                </li>
+
+                <li><strong>Hitung limit masing-masing suku saat \( n \to \infty \):</strong> <br>
+                  <div class="formula">Karena
+                  \[
+                  \frac{5}{n} \to 0 \quad \text{dan} \quad \frac{7}{n} \to 0,
+                  \]</div>
+                  <div class="formula">maka:
+                  \[
+                  \frac{3 + \frac{5}{n}}{2 + \frac{7}{n}} \to \frac{3}{2}
+                  \]</div>
+                </li>
+              </ol>
+                
+              <h3>Kesimpulan:</h3>
+              <div class="formula">
+                Nilai limit barisan adalah:
+                \[
+                \boxed{\frac{3}{2}}
+                \]
+                Artinya, barisan ini <strong>konvergen</strong> ke \( \frac{3}{2} \).
+              </div>
+        </div>
+  </section>   
+
+    <section id="DeretTakHingga" class="section">
+      <h2><i class="fas fa-balance-scale"></i>Deret Tak Hingga</h2>
+        <div class="example">
+          <p>
+            Deret tak hingga adalah jumlah dari semua suku dalam suatu barisan tak hingga. Ditulis dengan notasi:
+          </p>
+          <div class="formula">\[\sum_{n=1}^{\infty} a_n = a_1 + a_2 + a_3 + \dots\]</div>
+          <p>
+            Jika penjumlahan semua suku tersebut mendekati suatu nilai tertentu, maka deret disebut <strong>konvergen</strong>. Namun jika hasilnya terus bertambah tanpa batas (menuju tak hingga), maka deret tersebut disebut <strong>divergen</strong>.
+          </p>
+           <h3>Contoh Deret Konvergen:</h3>
+          <div class="formula">
+            \[
+            \sum_{n=1}^{\infty} \frac{1}{2^n} = \frac{1}{2} + \frac{1}{4} + \frac{1}{8} + \dots = 1
+            \]
+            Karena hasilnya mendekati angka tertentu, yaitu 1, maka ini adalah <strong>deret konvergen</strong>.
+          </div>
+          <h3>Contoh Deret Divergen:</h3>
+          <div class="formula">\[
+            \sum_{n=1}^{\infty} 1 = 1 + 1 + 1 + 1 + \dots = \infty
+            \]
+            Karena hasilnya terus bertambah tanpa batas, maka ini adalah <strong>deret divergen</strong>.
+          </div>
+    </section> 
+
+    <section id="DeretAbsolut" class="section">
+      <h2><i class="fas fa-random"></i>Deret Absolut</h2>
+        <div class="example">
+          <p>
+            <strong>Deret konvergen absolut</strong> adalah deret tak hingga yang nilai mutlak dari suku-sukunya membentuk deret konvergen.
+          </p>
+
+          <p>
+            Artinya, jika:
+            \[
+            \sum_{n=1}^{\infty} |a_n|
+            \]
+            konvergen, maka deret:
+            \[
+            \sum_{n=1}^{\infty} a_n
+            \]
+            juga pasti konvergen. Dan dalam hal ini, kita menyebut bahwa deret <strong>konvergen secara absolut</strong>.
+          </p>
+
+          <h3>Contoh Deret Absolut:</h3>
+          <div class="formula"><p>
+            Pertimbangkan deret:
+            \[
+            \sum_{n=1}^{\infty} \frac{(-1)^n}{n^2}
+            \]
+            Deret ini merupakan deret berselang-seling (berganti tanda). Mari kita lihat nilai mutlaknya:
+            \[
+            \sum_{n=1}^{\infty} \left|\frac{(-1)^n}{n^2}\right| = \sum_{n=1}^{\infty} \frac{1}{n^2}
+            \]
+          </p>
+          </div>
+          <p>
+            Deret ini adalah <strong>p-deret</strong> dengan nilai \( p = 2 \), yang lebih besar dari 1. Berdasarkan uji konvergensi p-deret, deret ini <strong>konvergen</strong>.
+          </p>
+
+          <p>
+            Karena nilai mutlak dari suku-sukunya membentuk deret yang konvergen, maka:
+            \[
+            \sum_{n=1}^{\infty} \frac{(-1)^n}{n^2}
+            \]
+            adalah deret <strong>konvergen absolut</strong>.
+          </p>
+          <h3>Catatan</h3>
+          <div class="formula">
+            <ul>
+              <li>
+                Semua deret yang <strong>konvergen absolut</strong> juga <strong>konvergen biasa</strong>.
+              </li>
+              <li>
+                Tapi tidak semua deret konvergen biasa adalah konvergen absolut.
+                Contoh deret yang hanya konvergen tapi <em>tidak</em> konvergen absolut adalah deret berselang-seling
+                seperti:
+                \[
+                \sum_{n=1}^{\infty} \frac{(-1)^{n+1}}{n}
+                \]
+                Deret ini disebut konvergen <em>bersyarat</em>.
+              </li>
+            </ul>
+          </div> 
+        </div>
+    </section>
+
+    <section id="DeretKonvergenKondisional" class="section">
+      <h2><i class="material-icons" style="font-size: 48px;">calculate</i>Deret Konvergen Kondisional</h2>
+        <div class="example">
+          <p>
+            Sebuah <strong>deret konvergen kondisional</strong> adalah deret yang konvergen, tetapi 
+            deret dari <em>nilai mutlak</em> suku-sukunya <strong>divergen</strong>.
+          </p>
+          <h3>Contoh Klasik:</h3>
+          <p>
+            Pertimbangkan deret:
+            <div class="formula">\[
+            \sum_{n=1}^{\infty} \frac{(-1)^{n+1}}{n} = 1 - \frac{1}{2} + \frac{1}{3} - \frac{1}{4} + \dots
+            \]
+            Deret ini adalah contoh <strong>deret harmonik berganti tanda</strong> (alternating harmonic series).
+          </p>
+        </div>
+          <p>
+            Deret ini <strong>konvergen</strong> karena memenuhi syarat <em>uji Leibniz</em>:
+            <ul>
+              <li>Suku-sukunya \( \frac{1}{n} \) positif dan menurun</li>
+              <li>\( \lim_{n \to \infty} \frac{1}{n} = 0 \)</li>
+            </ul>
+          </p>
+
+          <p>
+            Namun, jika kita ambil nilai mutlak dari suku-sukunya:
+            <div class="formula">\[
+            \sum_{n=1}^{\infty} \left|\frac{(-1)^{n+1}}{n}\right| = \sum_{n=1}^{\infty} \frac{1}{n}
+            \]
+            </div>
+            maka deret tersebut menjadi <strong>deret harmonik biasa</strong>, yang diketahui <strong>divergen</strong>.
+          </p>
+
+          <p>
+            Karena deret aslinya konvergen tetapi nilai mutlaknya divergen, maka deret ini disebut:
+            <strong>Konvergen Kondisional</strong>.
+          </p>
+
+          <h3>Perbedaan dengan Deret Konvergen Absolut</h3>
+          <div class="formula">
+          <ul>
+            <li><strong>Konvergen absolut</strong>: deret asli dan nilai mutlaknya sama-sama konvergen</li>
+            <li><strong>Konvergen kondisional</strong>: deret asli konvergen, tapi nilai mutlaknya divergen</li>
+          </ul>
+          </div>
+        </div>
+    </section>  
+
+    <section id="KonvergendanDivergen" class="section">
+      <h2><i class="fas fa-vial"></i>Konvergen dan Divergen</h2>
+        <div class="example">
+          <h3>1. Konvergen:</h3>
+          <p><strong>Konvergen</strong> adalah kondisi di mana hasil penjumlahan dari suku-suku dalam suatu deret tak hingga <em>mendekati suatu nilai tertentu</em> (berhingga).</p>
+          <h3>Contoh deret konvergen:</h3>
+          <div class="formula">$$\sum_{n=1}^{\infty} \frac{1}{2^n} = \frac{1}{2} + \frac{1}{4} + \frac{1}{8} + \cdots = 1$$
+          </div>
+          <p>Penjumlahan ini <em>mendekati nilai 1</em>, sehingga deret ini disebut <strong>konvergen</strong>.</p>
+
+          <h3>2. Divergen:</h3>
+          <p><strong>Divergen</strong> adalah kondisi di mana penjumlahan dari suku-suku deret <em>tidak mendekati nilai tertentu</em>, tetapi terus bertambah hingga tak hingga.</p>
+          <h3>Contoh deret divergen:</h3>
+          <div class="formula">$$\sum_{n=1}^{\infty} 1 = 1 + 1 + 1 + 1 + \cdots = \infty$$</div>
+          <p>Karena hasil penjumlahannya tak terbatas, maka deret ini disebut <strong>divergen</strong>.</p>
+        </div>
+    </section>
+
+    <section id="DeretGeometriTakHingga" class="section">
+      <h2><i class="fas fa-percentage"></i>Deret Geometri Tak Hingga</h2>
+        <div class="example">
+          <p><strong>Deret geometri tak hingga</strong> adalah penjumlahan dari barisan geometri yang memiliki jumlah suku tak terbatas, seperti:</p>
+          <h3>Bentuk Umum:</h3>
+          <div class="formula">
+          <p>
+            $$a + ar + ar^2 + ar^3 + ar^4 + \cdots$$
+          </p>
+          </div>
+          <p>Deret ini disebut <strong>konvergen</strong> jika rasio \( |r| < 1 \), karena jumlah sukunya akan mendekati nilai tertentu.</p>
+          <h3>Rumus Jumlah Deret Geometri Tak Hingga</h3>
+          <p>Jika \( |r| < 1 \), maka jumlah deret tak hingga dirumuskan sebagai:</p>
+          <div class="formula"><p>
+            $$S = \frac{a}{1 - r}$$
+          </p>
+          </div>
+          <h3>Keterangan:</h3>
+          <ul>
+            <li>\( S \) = jumlah deret tak hingga</li>
+            <li>\( a \) = suku pertama</li>
+            <li>\( r \) = rasio (pengali antar suku)</li>
+          <h3>Catatan:</h3>
+          <div class="formula"><p>Jika \( |r| \geq 1 \), maka deret <strong>divergen</strong> dan tidak memiliki jumlah yang berhingga.</p>
+          </div>
+
+          <h3>Contoh Soal</h3>
+          <div class="formula">
+          <p>Hitung jumlah dari deret berikut:</p>
+          <p>
+            $$1 + \frac{1}{2} + \frac{1}{4} + \frac{1}{8} + \cdots$$
+          </p>
+          </div>                    
+
+          <h3>Langkah-langkah Penyelesaian</h3>
+          <div class="formula">
+            <ul>
+              <li>Tentukan suku pertama: \( a = 1 \)</li>
+              <li>Tentukan rasio: 
+                $$ r = \frac{1/2}{1} = \frac{1}{2} $$</li>
+              <li>Karena \( r = \frac{1}{2} < 1 \), maka deret ini <strong>konvergen</strong></li>
+              <li>Gunakan rumus jumlah:
+                $$ S = \frac{a}{1 - r} = \frac{1}{1 - \frac{1}{2}} = \frac{1}{\frac{1}{2}} = 2 $$</li>
+              </ul>
+          </div>
+          
+          <p><strong>Kesimpulan:</strong> Jumlah deret tersebut adalah <mark>2</mark>.</p>
+
+          <h3>Contoh Deret Divergen</h3>
+          <div class="formula">
+          <p>
+            $$2 + 4 + 8 + 16 + \cdots$$
+          </p>
+          <p>
+            Di sini, \( a = 2 \) dan \( r = 2 \), sehingga \( r > 1 \) → <strong>deret divergen</strong>. Jumlahnya tidak mendekati nilai tetap (menuju tak hingga).
+          </p>
+          </div>          
+        </div>
+    </section>
+
+    <section id="TesKonvergensi" class="section">
+      <h2><i class="fas fa-shapes"></i>Tes Konvergensi</h2>
+        <div class="example">
+          <p>Untuk mengetahui apakah suatu deret tak hingga <strong>konvergen</strong> (jumlahnya mendekati nilai tertentu) atau <strong>divergen</strong> (jumlahnya tidak mendekati), digunakan berbagai <strong>tes konvergensi</strong> berikut:</p>
+          <hr>
+          <h3>1. Tes Perbandingan (Direct Comparison Test)</h3>
+          <p>Bandingkan \( a_n \) dengan deret \( b_n \) yang sudah diketahui konvergen atau divergen.</p>
+
+          <ul>
+            <li>Jika \( 0 \le a_n \le b_n \) dan \( \sum b_n \) konvergen, maka \( \sum a_n \) konvergen</li>
+            <li>Jika \( a_n \ge b_n \ge 0 \) dan \( \sum b_n \) divergen, maka \( \sum a_n \) divergen</li>
+          </ul>
+          <br>
+          <h3>Contoh:</h3> 
+          <div class="formula">
+          <p>Bandingkan \( \frac{1}{n^2 + 1} \) dengan \( \frac{1}{n^2} \)  
+            → karena \( \frac{1}{n^2} \) konvergen dan \( \frac{1}{n^2 + 1} \le \frac{1}{n^2} \), maka deretnya juga <mark>konvergen</mark>.</p>
+          </p>
+          </div>
+            <hr>
+            
+          <h3>2. Tes Rasio (Ratio Test)</h3>
+            <p>Gunakan untuk deret dengan faktorial atau perpangkatan:</p>
+            <div class="formula">
+            <p>
+              $$ L = \lim_{n \to \infty} \left| \frac{a_{n+1}}{a_n} \right| $$
+            </p>
+            </div>
+            <ul>
+              <li>Jika \( L < 1 \), maka deret <strong>konvergen</strong></li>
+              <li>Jika \( L > 1 \) atau tak hingga, maka deret <strong>divergen</strong></li>
+              <li>Jika \( L = 1 \), <strong>tidak dapat disimpulkan</strong></li>
+            </ul>
+            <h3>Contoh:</h3> 
+            <div class="formula">
+            <p>\( a_n = \frac{n!}{n^n} \)</p>
+            <p>Gunakan tes rasio → hasilnya \( L < 1 \) → <mark>konvergen</mark></p>
+            <hr>
+
+            <p>Jika:</p>
+            <p>
+              $$ \lim_{n \to \infty} a_n \ne 0 \text{ atau tidak ada limit} \Rightarrow \sum a_n \text{ divergen} $$
+            </p>
+
+            <p><strong>Contoh:</strong> \( a_n = \frac{n}{n+1} \Rightarrow \lim a_n = 1 \ne 0 \) → <mark>divergen</mark></p>
+
+            <p><em>Tapi jika limit = 0, belum tentu konvergen. Harus diuji dengan tes lain.</em></p>
+            </div>
+            <hr>
+            <h3>3. Tes Batas Suku ke-n (nth Term Test)</h3>
+            <p>Jika:</p>
+            <div class="formula">
+            <p>
+              $$ \lim_{n \to \infty} a_n \ne 0 \text{ atau tidak ada limit} \Rightarrow \sum a_n \text{ divergen} $$
+            </p>
+            </div>
+            <h3>Contoh:</h3>
+            <div class="formula">
+            <p>\( a_n = \frac{n}{n+1} \Rightarrow \lim a_n = 1 \ne 0 \) → <mark>divergen</mark></p>
+            </div>
+            <p><em>Tapi jika limit = 0, belum tentu konvergen. Harus diuji dengan tes lain.</em></p>
+            
+            <hr>
+
+            <h3>4. Tes p-Series</h3>
+            <p>Untuk deret berbentuk:</p>
+            <div class="formula">
+            <p>
+              $$ \sum_{n=1}^{\infty} \frac{1}{n^p} $$
+            </p>
+            </div>
+            <ul>
+              <li>Jika \( p > 1 \), maka <strong>konvergen</strong></li>
+              <li>Jika \( p \le 1 \), maka <strong>divergen</strong></li>
+            </ul>
+
+            <h3>Contoh</h3>
+            <div class="formula">
+            <p> \( \sum \frac{1}{n^2} \) konvergen karena \( p = 2 > 1 \)</p>
+            <p>\( \sum \frac{1}{n} \) divergen (disebut deret harmonik)</p>
+            </div>
+            <hr>
+
+            <h3>5. Deret Harmonik</h3>
+            <p>Contoh penting dari p-series dengan \( p = 1 \):</p>
+            <div class="formula">
+              <p>
+                $$ \sum_{n=1}^{\infty} \frac{1}{n} = 1 + \frac{1}{2} + \frac{1}{3} + \cdots $$
+              </p>
+            </div>
+            <p>Deret ini <strong>divergen</strong> walaupun sukunya makin kecil.</p>
+
+            <hr>
+
+            <h3>6. Tes Perbandingan Limit</h3>
+            <p>Gunakan saat perbandingan langsung sulit:</p>
+            <div class="formula">
+              <p>
+                $$ \lim_{n \to \infty} \frac{a_n}{b_n} = L $$
+              </p>
+            </div>
+            <ul>
+              <li>Jika \( 0 < L < \infty \), maka \( a_n \) dan \( b_n \) memiliki sifat yang sama (keduanya konvergen atau divergen)</li>
+            </ul>
+            <br>
+            <hr>
+
+            <h3>7. Tes Akar (Root Test)</h3>
+            <div class="formula">
+            <p>
+              $$ L = \lim_{n \to \infty} \sqrt[n]{|a_n|} $$
+            </p>
+            </div>
+            <ul>
+              <li>Jika \( L < 1 \), maka deret <strong>konvergen</strong></li>
+              <li>Jika \( L > 1 \), maka deret <strong>divergen</strong></li>
+              <li>Jika \( L = 1 \), tidak dapat disimpulkan</li>
+            </ul>
+    
+            <br>
+            <hr>
+
+            <h3>8. Tes Integral</h3>
+            <p>Jika \( a_n = f(n) \) dengan \( f(x) \) positif, menurun, kontinu pada \( x \ge 1 \), maka:</p>
+            <div class="formula">
+            <p>
+              $$ \sum a_n \text{ dan } \int_1^\infty f(x) dx \text{ memiliki sifat yang sama} $$
+            </p>
+            </div>
+            <hr>
+
+            <h3>9. Tes Deret Berganti Tanda (Alternating Series Test / Uji Leibniz)</h3>
+            <p>Untuk deret bentuk:</p>
+            <div class="formula">
+            <p>
+              $$ \sum_{n=1}^{\infty} (-1)^{n+1} a_n $$
+            </p>
+            </div>
+            <ul>
+              <li>Jika \( a_n > 0 \), menurun, dan \( \lim a_n = 0 \), maka <strong>konvergen</strong></li>
+            </ul>
+
+            <p><strong>Contoh:</strong> \( \sum (-1)^{n+1} \frac{1}{n} \)</p>
+            <p>Disebut <strong>konvergen kondisional</strong> karena deret nilai mutlaknya divergen.</p>
+        </div>
+    </section>  
+
+  
+
+ <section id="video" class="section">
+
+<div class="example">
+<h2><i class="fas fa-video"></i>Video Pembelajaran Barisan dan Deret Tak Hingga</h2>
+  <div class="video-grid">
+
+<iframe width="410px" height="auto" src="https://www.youtube.com/embed/videoseries?si=AeAc9ntJ5Gmj5fOI&amp;list=PLW-6EsV5q212-Zzz_4tv3mg0Yf2iaVkpi" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+              </div>
+
+        <div class="con-kuis">
+                  <p>Yuk, kita cek sejauh mana kamu paham! Klik tombol di bawah untuk mulai kuisnya.</p>
+
+          <a href="SOALMATERI3.html" class="btn-kuis">Mulai!
+          </a>
+
+        </div>
+</section>
+
+        <div class="navigation-buttons">
+        <a href="integral_tak_wajar.html" class="btn-anim">
+            <i class="fas fa-arrow-left"></i> Materi Sebelumnya
+          </a>
+           <a href="pengantar_diferensial_parsial.html" class="btn-anim">
+            Materi Selanjutnya <i class="fas fa-arrow-right"></i>
+          </a>
+          
+
+        </div>
+      </div>
+       <div data-aos="fade" class="sidebar">
+        <div style="overflow-y: auto;  max-height: 80vh;" class="sidebar-menu responsive-sidebar" id="responsiveMenu">
+          <h3><i class="fas fa-list-ul"></i> Daftar Isi</h3>
+                    <a href="#pengantar">Yuk Kenalan dengan Barisan dan Deret!?</a>
+                    <a href="#pengertianDeret">Apa itu Deret?</a>
+                    <a href="#notasiSigma">Notasi Sigma</a>
+                    <a href="#BarisanGeo">Barisan Geometri dan Deret Geometri</a>
+                    <a href="#DeretTakHingga">Deret Tak Hingga</a>
+                    <a href="#DeretAbsolut">Deret Absolut</a>
+                     <a href="#DeretKonvergenKondisional">Deret Konvergen Kondisional</a>
+                    <a href="#KonvergendanDivergen">Konvergen dan Divergen</a>
+                    <a href="#DeretGeometriTakHingga">Deret Geometri Tak Hingga</a>
+                    <a href="#TesKonvergensi">Tes Konvergensi</a>
+                    <a href="#video">Video Pembelajaran</a>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+<div class="team-container">
+    <div class="team-member">
+        <img src="nanda.jpg" alt="Anggota 1">
+        <h3>Nanda Raissa</h3>
+        <p>247006111108</p>
+        <div class="social-links">
+            <a href="https://www.instagram.com/nanda_rsa?igsh=ajhxcXB1cHd0azlw" target="_blank">
+                <i class="fab fa-instagram"></i>
+            </a>
+        </div>
+    </div>
+
+    <div class="team-member">
+        <img src="annisa3.jpg" alt="Anggota 1">
+        <h3>Annisa Safira Wibowo</h3>
+        <p>247006111101</p>
+        <div class="social-links">
+            <a href="https://www.instagram.com/dfaviera?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank">
+                <i class="fab fa-instagram"></i>
+            </a>
+        </div>
+    </div>
+
+    <div class="team-member">
+        <img src="agniya.jpg" alt="Anggota 1">
+        <h3>Agniya Azzahra</h3>
+        <p>247006111090</p>
+        <div class="social-links">
+            <a href="https://www.instagram.com/qubialy_/?utm_source=ig_web_button_share_sheet" target="_blank">
+                <i class="fab fa-instagram"></i>
+            </a>
+
+        </div>
+    </div>
+
+    <div class="team-member">
+        <img src="diyani.jpg" alt="Anggota 1">
+        <h3>Diyani Rahayu Nur'aeni</h3>
+        <p>247006111115</p>
+        <div class="social-links">
+            <a href="https://www.instagram.com/dyanryn_?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank">
+                <i class="fab fa-instagram"></i>
+            </a>
+        </div>
+    </div>
+</div>
+</div>
+
+<script src="https://kit.fontawesome.com/a076d05399.js"></script>
+<script>
+  // Initialize
+  document.addEventListener('DOMContentLoaded', function() {
+    const container = document.querySelector('.math-universe');
+    const toggleSlopeBtn = document.getElementById('toggleSlope');
+    const toggleSolutionsBtn = document.getElementById('toggleSolutions');
+    const playPauseBtn = document.getElementById('playPause');
+    const particle = document.querySelector('.particle-system');
+    
+    // Start with solutions visible
+    container.classList.add('show-solutions');
+    toggleSolutionsBtn.textContent = 'Hide Solutions';
+    
+    // Toggle slope field
+    toggleSlopeBtn.addEventListener('click', function() {
+      container.classList.toggle('show-slope');
+      this.textContent = container.classList.contains('show-slope') 
+        ? 'Hide Slope' 
+        : 'Show Slope';
+    });
+    
+    // Toggle solutions
+    toggleSolutionsBtn.addEventListener('click', function() {
+      container.classList.toggle('show-solutions');
+      this.textContent = container.classList.contains('show-solutions') 
+        ? 'Hide Solutions' 
+        : 'Show Solutions';
+    });
+    
+    // Play/pause animation
+    let isPlaying = true;
+    playPauseBtn.addEventListener('click', function() {
+      isPlaying = !isPlaying;
+      this.textContent = isPlaying ? '❚❚ Pause' : '▶ Play';
+      particle.style.animationPlayState = isPlaying ? 'running' : 'paused';
+    });
+  });
+</script>
+<footer class="footer">
+    <div class="footer-content">
+        <div class="footer-logo font">
+           <b><span style="color: white; font-family: 'Playfair Display', serif; font-size: 25px; vertical-align: 8px;">Calculzy</span></b>
+
+        </div>
+
+    <div class="footer-bottom center flex">
+        <p>&copy; 2025 Kelompok Calculzy | Universitas Siliwangi.</p>
+    </div>
+  </div>
+</footer>
+
+<script type="text/javascript" src="script.js"></script>
+
+</body>
+</html>

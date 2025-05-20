@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+      <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <title>Calculzy</title>
+  <style>
+
+
+[data-theme="light"] .logo {
+  color: black;
+}
+
+[data-theme="light"] .nav-links a {
+  color: black;
+}
+
+       
+    .page-header {
+      position: relative;
+      width: 100%;
+      padding: 12rem 5% 6rem;
+      background: linear-gradient(to bottom, var(--darker), var(--dark));
+      overflow: hidden;
+    }
+    
+    .page-header::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, rgba(15, 23, 42, 0) 70%);
+      z-index: 0;
+    }
+    
+    .con-0 {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 6rem;
+      position: relative;
+      z-index: 1;
+    }
+    [data-theme="dark"] .team-container{
+      background: none;
+    }
+    .con-1 {
+      flex: 1;
+      position: relative;
+      z-index: 1;
+    }
+
+    .footer{
+      background-color: none !important;
+    }
+    
+    .con-1::before {
+      content: '';
+      position: absolute;
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(99, 102, 241, 0.1) 0%, rgba(15, 23, 42, 0) 70%);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: -1;
+    }
+    
+    .image {
+      width: 100%;
+      max-width: 500px;
+      height: auto;
+      border-radius: 1rem;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+      transform: perspective(1000px) rotateY(-10deg);
+      transition: all 0.5s ease;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    
+    .con-1:hover .image {
+      transform: perspective(1000px) rotateY(0deg);
+      box-shadow: 0 30px 60px -10px rgba(99, 102, 241, 0.3);
+    }
+    
+    .con-2 {
+      flex: 1;
+      text-align: left;
+    }
+
+    [data-theme="dark"] .hero h1{
+      background: linear-gradient(to right, #ffffff, var(--gray));
+        -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 3rem;
+      font-weight: 700;
+      color: var(--lighter);
+      margin-bottom: 1.5rem;
+      line-height: 1.2;
+background: linear-gradient(to right, #000000, var(--gray));    
+  -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    
+    .hero p {
+      font-size: 1.1rem;
+      color: var(--gray);
+      margin-bottom: 2.5rem;
+      max-width: 500px;
+    }
+    
+    .btn-anim {
+      padding: 1rem 2.5rem;
+      font-size: 1rem;
+      font-weight: 500;
+      border: none;
+      border-radius: 50px;
+      background: var(--gradient);
+      color: white;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      z-index: 1;
+    }
+    
+    .btn-anim:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 30px rgba(99, 102, 241, 0.4);
+    }
+    
+    .btn-anim::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: 0.5s;
+      z-index: -1;
+    }
+    
+    .btn-anim:hover::before {
+      left: 100%;
+    }
+    
+
+    
+    @media (max-width: 768px) {
+
+      
+      .hero {
+        text-align: center;
+      }
+      
+      .hero h1 {
+        font-size: 2.2rem;
+      }
+      
+      .hero p {
+        margin-left: auto;
+        margin-right: auto;
+      }
+      
+      .page-header::before {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  
+<nav class="navbar">
+  <div class="logo">Calculzy</div>
+  <div class="nav-links">
+    <a href="#">Beranda</a>
+    <a href="#Materi">Materi</a>
+
+    <button id="themeToggle" class="theme-toggle">
+      <i class="fas fa-moon"></i>
+    </button>
+  </div>
+</nav>
+  
+<div class="hero-section">
+    <div class="particles" id="particles"></div>
+  <div class="hero-content">
+        <div class="hero-visual">
+      <div class="visual-element">
+        <div class="math-symbol">∫</div>
+        <div class="floating-shapes">
+          <div class="shape circle"></div>
+          <div class="shape triangle"></div>
+          <div class="shape square"></div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-text">
+      <h1 data-aos="fade" data-aos-delay="150" class="hero-logo">Calculzy</h1>
+      <div data-aos="fade" data-aos-delay="150" class="hero-divider"></div>
+      <p data-aos="fade-right" data-aos-delay="200" class="hero-description">
+        Platform pembelajaran kalkulus modern yang menyajikan materi Kalkulus 2 secara lengkap 
+        dengan pendekatan visual dan interaktif. Temukan koleksi materi terstruktur, kuis 
+        penguji pemahaman, dan alat bantu belajar yang dirancang untuk membuat matematika 
+        menjadi pengalaman yang menginspirasi.
+      </p>
+
+    </div>
+
+  </div>
+</div>
+
+
+
+  <div class="particles" id="particles"></div>
+
+    <section class="features">
+        <div class="container">
+            <div class="section-title">
+                <h2 data-aos="fade" data-aos-delay="50">Kenapa Memilih Calculzy?</h2>
+                <p>Kami menyediakan alat dan materi terbaik untuk membantu Anda menguasai matematika</p>
+            </div>
+            <div data-aos="fade-up" data-aos-delay="150" class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                    </div>
+                    <h3>Materi Terstruktur</h3>
+                    <p>Semua materi kalkulus disusun dengan rapi dan didukung sumber terpercaya, membuat proses belajar jadi lebih fokus dan efektif.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <h3>Pelajaran Interaktif</h3>
+                    <p>Nikmati pengalaman belajar dengan konten visual dan latihan interaktif yang membantu kamu memahami materi secara mendalam.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Pelacakan Kemajuan</h3>
+                    <p>Pantau perkembangan belajar Anda dengan analisis detail dan rekomendasi materi yang perlu dipelajari lebih lanjut.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<hr class="neon-divider">
+
+<div class="container-1">
+  <div>
+    <h1 data-aos="fade-up" data-aos-delay="50" align="center">Sudah siap memulai petualangan?</h1>
+    <p data-aos="fade" data-aos-delay="150" class="center">Topik-topik berikut ini akan membantu Anda memahami konsep-konsep kalkulus dengan lebih baik.</p>
+    <div style="display: flex; justify-content: center; align-items: center; margin-top: 50px;">
+    <i data-aos="fade-up" data-aos-delay="150" class="material-icons gradient icon-arrow animate-drop icon-down">arrow_downward</i>
+</div>
+
+
+  </div>
+
+
+
+ <section data-aos="fade-up" data-aos-delay="150" id="Materi" style="scroll-margin-top: 170px; /* Atur sesuai tinggi navbar atau jarak yang diinginkan */
+" class="features con-materi">
+        <div class="container">
+            <div class="features-grid">
+
+                    <a href="bilangan_kompleks.html">
+      <div class="slide" style="background-image: url(bil_kompleks.png); background-size: cover; background-position: center; background-repeat: no-repeat; border-top: 4px solid #F4A6C1; background-color: #C2185B;">
+        <h3 class="elegant-title margin-none">Bilangan Kompleks</h3>
+        <button class="slide-btn">
+          Pelajari Sekarang <i class="material-icons">menu_book</i>
+        </button>
+      </div>
+    </a>
+    <a href="integral_tak_wajar.html">
+      <div class="slide" style="background-image: url(integral_tak_wajar.png); background-size: cover; background-position: center; background-repeat: no-repeat;  border-top: 4px solid #A7C7E7; background-color: #1976D2;">
+        <h3 class="elegant-title margin-none">Integral Tak Wajar</h3>
+        <button class="slide-btn">
+          Pelajari Sekarang <i class="material-icons">menu_book</i>
+        </button>
+      </div>
+    </a>
+    <a href="barisan_deret_tak_hingga.html">
+      <div class="slide" style="background-image: url(baris_tak_hingga.png); background-size: cover; background-position: center; background-repeat: no-repeat;border-top: 4px solid #F7D1C1; background-color: #FF7043;">
+        <h3 class="elegant-title margin-none">Barisan dan Deret Tak Hingga</h3>
+        <button class="slide-btn">
+          Pelajari Sekarang <i class="material-icons">menu_book</i>
+        </button>
+      </div>
+    </a>
+    <a href="pengantar_diferensial_parsial.html">
+      <div class="slide" style="background-image: url(pengantar_dif_parsial.png); background-size: cover; background-position: center; background-repeat: no-repeat;border-top: 4px solid #D6CDEA; background-color: #512DA8;">
+        <h3 class="elegant-title margin-none">Pengantar Diferensial Parsial</h3>
+        <button class="slide-btn">
+          Pelajari Sekarang <i class="material-icons">menu_book</i>
+        </button>
+      </div>
+    </a>
+    <a href="persamaan_diferensial_dasar.html">
+      <div class="slide" style="background-image: url(persamaan_diferensial_dasar.png); background-size: cover; background-position: center; background-repeat: no-repeat;border-top: 4px solid #D6CDEA; background-color: #512DA8;">
+        <h3 class="elegant-title margin-none">Persamaan Diferensial Dasar</h3>
+        <button class="slide-btn">
+          Pelajari Sekarang <i class="material-icons">menu_book</i>
+        </button>
+      </div>
+
+    </a>
+    <a href="pengantar_integral_lipat.html">
+      <div class="slide" style="background-image: url(integral_lipat.png); background-size: cover; background-position: center; background-repeat: no-repeat;border-top: 4px solid #D6CDEA; background-color: #512DA8;">
+        <h3 class="elegant-title margin-none">Pengantar Integral Lipat</h3>
+        <button class="slide-btn">
+          Pelajari Sekarang <i class="material-icons">menu_book</i>
+        </button>
+      </div>
+    </a>
+
+
+            </div>
+        </div>
+    </section>
+
+<div class="team-container" style="background: none;">
+    <div class="team-member">
+        <img src="nanda.jpg" alt="Anggota 1">
+        <h3>Nanda Raissa</h3>
+        <p>247006111108</p>
+        <div class="social-links">
+            <a href="https://www.instagram.com/nanda_rsa?igsh=ajhxcXB1cHd0azlw" target="_blank">
+                <i class="fab fa-instagram"></i>
+            </a>
+        </div>
+    </div>
+
+    <div class="team-member">
+        <img src="annisa3.jpg" alt="Anggota 1">
+        <h3>Annisa Safira Wibowo</h3>
+        <p>247006111101</p>
+        <div class="social-links">
+            <a href="https://www.instagram.com/dfaviera?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank">
+                <i class="fab fa-instagram"></i>
+            </a>
+        </div>
+    </div>
+
+    <div class="team-member">
+        <img src="agniya.jpg" alt="Anggota 1">
+        <h3>Agniya Azzahra</h3>
+        <p>247006111090</p>
+        <div class="social-links">
+            <a href="https://www.instagram.com/qubialy_/?utm_source=ig_web_button_share_sheet" target="_blank">
+                <i class="fab fa-instagram"></i>
+            </a>
+
+        </div>
+    </div>
+
+    <div class="team-member">
+        <img src="diyani.jpg" alt="Anggota 1">
+        <h3>Diyani Rahayu Nur'aeni</h3>
+        <p>247006111115</p>
+        <div class="social-links">
+            <a href="https://www.instagram.com/dyanryn_?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank">
+                <i class="fab fa-instagram"></i>
+            </a>
+        </div>
+    </div>
+</div>
+</div>
+
+<script src="https://kit.fontawesome.com/a076d05399.js"></script>
+<script>
+const container = document.getElementById("particles");
+const canvas = document.createElement("canvas");
+const ctx = canvas.getContext("2d");
+
+container.appendChild(canvas);
+
+canvas.width = container.offsetWidth;
+canvas.height = container.offsetHeight;
+
+window.addEventListener("resize", () => {
+  canvas.width = container.offsetWidth;
+  canvas.height = container.offsetHeight;
+});
+
+const orbs = [];
+const orbCount = 25; // jumlah orb lebih banyak
+
+for (let i = 0; i < orbCount; i++) {
+  orbs.push({
+    x: Math.random() * canvas.width,
+    y: Math.random() * canvas.height,
+    radius: Math.random() * 4 + 2,
+    speedX: (Math.random() - 0.5) * 3, // kecepatan lebih cepat
+    speedY: (Math.random() - 0.5) * 3,
+    color: `rgba(255,255,255,${Math.random() * 0.8 + 0.2})`,
+  });
+}
+
+function animate() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  for (let orb of orbs) {
+    orb.x += orb.speedX;
+    orb.y += orb.speedY;
+
+    // bounce on edges
+    if (orb.x < 0 || orb.x > canvas.width) orb.speedX *= -1;
+    if (orb.y < 0 || orb.y > canvas.height) orb.speedY *= -1;
+
+    ctx.beginPath();
+    ctx.arc(orb.x, orb.y, orb.radius, 0, Math.PI * 2);
+    ctx.fillStyle = orb.color;
+    ctx.fill();
+  }
+
+  requestAnimationFrame(animate);
+}
+
+animate();
+
+</script>
+<script>
+  let orbCount = window.innerWidth <= 768 ? 50 : 150; // 50 kalau mobile, 150 kalau desktop
+
+  // Contoh kalau kamu pakai particles.js:
+  particlesJS("particles", {
+    particles: {
+      number: {
+        value: orbCount
+      },
+      // setting lainnya...
+    }
+  });
+</script>
+
+
+<footer class="footer" >
+    <div class="footer-content">
+        <div class="footer-logo font">
+           <b><span style="color: white; font-family: 'Playfair Display', serif; font-size: 25px; vertical-align: 8px;">Calculzy</span></b>
+
+        </div>
+
+    <div class="footer-bottom center flex">
+        <p>&copy; 2025 Kelompok Calculzy | Universitas Siliwangi.</p>
+    </div>
+  </div>
+</footer>
+
+
+
+
+  <script src="script.js" type="text/javascript"></script>
+</body>
+</html>

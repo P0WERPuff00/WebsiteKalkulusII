@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <title>Integral Tak Wajar | Calculzy</title>
+  <style>
+    [data-theme="light"] .logo {
+      color: black;
+    }
+
+    [data-theme="light"] .nav-links a {
+      color: black;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--dark);
+      color: var(--text);
+      transition: all 0.3s ease;
+      line-height: 1.6;
+    }
+
+
+
+    .theme-toggle {
+      background: none;
+      border: none;
+      color: var(--lighter);
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+
+    .theme-toggle:hover {
+      transform: rotate(30deg);
+    }
+
+    .material-container {
+      max-width: 1200px;
+      margin: 0rem auto 4rem;
+    }
+
+    .material-header {
+      text-align: center;
+      margin-bottom: 4rem;
+      position: relative;
+    }
+
+    .material-header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.8rem;
+      margin-bottom: 1.5rem;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .material-header p {
+      font-size: 1.1rem;
+      color: var(--gray);
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+
+
+
+
+
+
+    .material-content {
+display: grid
+;
+    grid-template-columns: 1fr 70px;
+    gap: 12rem;
+    margin-left: -80px;
+    }
+
+
+
+.sidebar {
+  position: sticky;
+  top: 120px;
+  height: fit-content;
+  margin-left: -125px; /* tambahkan ini agar tidak nempel ke tepi kiri grid */
+  width: 300px;
+}
+
+
+    .sidebar-menu {
+      padding: 1.5rem;
+      background-color: var(--card);
+      backdrop-filter: blur(10px);
+      border-radius: 1rem;
+      padding: 1.5rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .sidebar-menu h3 {
+      font-size: 1.2rem;
+      margin-bottom: 1.5rem;
+      color: var(--primary-light);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .sidebar-menu ul {
+      list-style: none;
+    }
+
+    .sidebar-menu li {
+      margin-bottom: 0.8rem;
+    }
+
+    .sidebar-menu a {
+      color: var(--text);
+      text-decoration: none;
+      transition: color 0.3s;
+      display: block;
+      padding: 0.5rem 0;
+      border-left: 3px solid transparent;
+    }
+
+    .sidebar-menu a:hover, .sidebar-menu a.active {
+      color: var(--primary);
+      border-left: 3px solid var(--primary);
+    }
+
+    .section {
+      margin-bottom: 3rem;
+    }
+
+    .section h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      margin-bottom: 1.5rem;
+      color: var(--lighter);
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .section h2 i {
+      color: var(--primary);
+    }
+
+    .section p {
+      margin-bottom: 1.5rem;
+      line-height: 1.8;
+    }
+
+    .formula {
+      background-color: rgba(99, 102, 241, 0.1);
+      border-left: 4px solid var(--primary);
+      padding: 1.5rem;
+      border-radius: 0 0.5rem 0.5rem 0;
+      margin: 1.5rem 0;
+font-family: 'Poppins', sans-serif;
+      font-size: 1.1rem;
+      overflow-x: auto;
+    }
+
+    .example {
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+    }
+
+
+
+
+
+
+
+
+    .example h3 {
+      color: var(--primary-light);
+      margin-bottom: 1rem;
+      font-size: 1.2rem;
+    }
+
+    .visualization {
+      background-color: rgba(15, 23, 42, 0.5);
+      border-radius: 0.5rem;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+      text-align: center;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .visualization img {
+      max-width: 100%;
+      border-radius: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .visualization p {
+      font-size: 0.9rem;
+      color: white;
+    }
+
+    .btn-anim {
+      padding: 0.8rem 1.8rem;
+      font-size: 1rem;
+      font-weight: 500;
+      border: none;
+      border-radius: 50px;
+      background: var(--gradient);
+      color: white;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      z-index: 1;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+
+    .btn-anim:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 30px rgba(99, 102, 241, 0.4);
+    }
+
+    .btn-anim::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: 0.5s;
+      z-index: -1;
+    }
+
+    .btn-anim:hover::before {
+      left: 100%;
+    }
+
+    .navigation-buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 3rem;
+      padding-top: 2rem;
+    }
+
+    @media (max-width: 992px) {
+      .material-content {
+        grid-template-columns: 1fr;
+      }
+      
+      .sidebar {
+        position: static;
+        order: -1;
+        margin-bottom: 2rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .material-header h1 {
+        font-size: 2.2rem;
+      }
+      
+      .section h2 {
+        font-size: 1.5rem;
+      }
+    }
+
+      .improper-integral-animation {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 400px;
+    background: rgb(15 23 42 / 85%);
+    border-radius: 16px;
+    position: relative;
+    overflow: hidden;
+    margin: 2rem auto;
+    max-width: 800px;
+    box-shadow: 0 0 50px rgba(127, 0, 255, 0.3);
+
+  }
+
+  .math-canvas {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+
+  /* Axes */
+  .x-axis, .y-axis {
+    position: absolute;
+    background: rgba(255,255,255,0.15);
+  }
+
+  .x-axis {
+    width: 80%;
+    height: 1px;
+    bottom: 30%;
+    left: 10%;
+  }
+
+  .y-axis {
+    width: 1px;
+    height: 60%;
+    left: 50%;
+    bottom: 30%;
+    transform: translateX(-50%);
+  }
+
+  /* Function Curve (1/x^2) */
+  .function-curve {
+    position: absolute;
+    bottom: 30%;
+    left: 10%;
+    width: 80%;
+    height: 50%;
+    border-top: 2px solid #a5b4fc;
+    border-left: 2px solid transparent;
+    border-radius: 0 100% 0 0;
+    transform-origin: bottom left;
+    animation: drawCurve 3s ease-out forwards;
+  }
+
+  /* Integral Area */
+  .integral-area {
+    position: absolute;
+    bottom: 30%;
+    left: 10%;
+    width: 80%;
+    height: 50%;
+    background: linear-gradient(to top, rgba(99, 102, 241, 0.3), transparent);
+    clip-path: polygon(0% 100%, 0% 50%, 100% 0%, 100% 100%);
+    animation: fillArea 4s ease-in-out forwards;
+  }
+
+  /* Animated Elements */
+  .limit-arrow {
+    position: absolute;
+    top: 20%;
+    right: 5%;
+    color: #f472b6;
+    font-family: 'Courier New', monospace;
+    font-weight: bold;
+    animation: pulse 2s infinite alternate;
+  }
+
+  .integral-symbol {
+    position: absolute;
+    top: 40%;
+    left: 5%;
+    font-size: 3rem;
+    color: #a5b4fc;
+    animation: float 4s ease-in-out infinite;
+  }
+
+  .bounds {
+    position: absolute;
+    bottom: 25%;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #86efac;
+    font-family: 'Courier New', monospace;
+    animation: slideUp 2s ease-out;
+  }
+
+  /* Equation */
+  .equation {
+    position: absolute;
+    bottom: 15%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Times New Roman', serif;
+    font-size: 1.5rem;
+    color: white;
+    display: flex;
+    gap: 0.3rem;
+  }
+
+  .integral {
+    color: #a5b4fc;
+  }
+
+  .function {
+    color: #f472b6;
+  }
+
+  .equals {
+    color: white;
+    margin: 0 0.5rem;
+  }
+
+  .result {
+    color: #86efac;
+    animation: popIn 1s ease-out forwards;
+    animation-delay: 3s;
+    opacity: 0;
+  }
+
+  /* Animations */
+  @keyframes drawCurve {
+    0% { transform: scaleX(0) scaleY(0); }
+    100% { transform: scaleX(1) scaleY(1); }
+  }
+
+  @keyframes fillArea {
+    0% { clip-path: polygon(0% 100%, 0% 100%, 0% 100%, 0% 100%); }
+    100% { clip-path: polygon(0% 100%, 0% 50%, 100% 0%, 100% 100%); }
+  }
+
+  @keyframes pulse {
+    0% { opacity: 0.5; transform: translateY(0); }
+    100% { opacity: 1; transform: translateY(-10px); }
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+  }
+
+  @keyframes slideUp {
+    0% { opacity: 0; transform: translate(-50%, 20px); }
+    100% { opacity: 1; transform: translate(-50%, 0); }
+  }
+
+  @keyframes popIn {
+    0% { opacity: 0; transform: scale(0); }
+    80% { opacity: 1; transform: scale(1.2); }
+    100% { opacity: 1; transform: scale(1); }
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .improper-integral-animation {
+      height: 300px;
+    }
+    .equation {
+      font-size: 1.2rem;
+    }
+  }
+
+
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <a href="index.html" class="logo">Calculzy</a>
+    <div class="nav-links">
+      <a href="index.html">Beranda</a>
+                            <a class="dropdown-btn">Daftar Isi</a>
+
+                   <div class="dropdown">
+                <div class="dropdown-content" id="desktopDropdown">
+                          <a href="#pengantar">Apa itu Integral?</a>
+<a href="#aturan">Aturan-aturan Dasar Integral</a>
+<a href="#teknik">Teknik Dasar Integrasi</a>
+<a href="#definisi">Definisi Integral Tak Wajar</a>
+<a href="#penyelesaian">Cara Menyelesaikan Integral Tak Wajar</a>
+<a href="#kapan">Kapan Integral Tak Wajar Gagal?</a>
+<a href="#uji">Uji Konvergensi</a>
+<a href="#video">Video Pembelajaran</a>
+                </div>
+            </div>
+
+
+      <button id="themeToggle" class="theme-toggle">
+        <i class="fas fa-moon"></i>
+      </button>
+    </div>
+  </nav>
+
+    <div class="material-header hero-section">
+<h1 data-aos="fade" data-aos-delay="50" class="margin-top-70">BAB II: INTEGRAL TAK WAJAR</h1>
+  <div class="improper-integral-animation">
+  <div class="math-canvas">
+    <!-- Coordinate System -->
+    <div class="x-axis"></div>
+    <div class="y-axis"></div>
+    
+    <!-- Function Curve -->
+    <div class="function-curve"></div>
+    
+    <!-- Integral Area -->
+    <div class="integral-area"></div>
+    
+    <!-- Animated Elements -->
+    <div class="limit-arrow">lim → ∞</div>
+    <div class="integral-symbol">∫</div>
+    <div class="bounds">1 → ∞</div>
+    
+    <!-- Equation -->
+    <div class="equation">
+      <span class="integral">∫<sub>1</sub><sup>∞</sup></span>
+      <span class="function">1/x<sup>2</sup> dx</span>
+      <span class="equals">=</span>
+      <span class="result">1</span>
+    </div>
+  </div>
+</div>
+    </div>
+            <div class="particles" id="particles"></div>
+<div class="material-container">
+    <div class="material-content">
+
+      <div data-aos="fade-up" class="main-content">
+
+        <section id="pengantar" class="section">
+          <h2><i class="fas fa-book-open"></i>Apa itu integral?
+</h2>
+<p>Integral adalah kebalikan dari turunan, atau bisa juga dipahami sebagai luas di bawah kurva.</p>
+<p>Dalam bentuk umum:</p>
+<div class="example">
+<h3>Integral tak tentu: </h3>
+<div class="formula">
+<p>\( \int f(x)\,dx = F(x) + C \) Di mana \( F'(x) = f(x) \), dan C adalah konstanta.</p>
+</div>
+<h3>Integral tentu: </h3>
+<div class="formula">
+\( \int_a^b f(x)\,dx = F(b) - F(a) \) 
+</div>
+<p>
+Menghasilkan nilai numerik (bukan fungsi), biasanya dimaknai sebagai luas area antara grafik dan sumbu x.</p>
+
+</div>
+</section>
+
+        <section id="aturan" class="section">
+
+<h2><i class="fas fa-gavel"></i>Aturan-aturan dasar integral</h2>
+<div class="example">
+<h3>Integral fungsi polinomial</h3>
+<div class="formula">
+<p>\( \int x^n\,dx = \frac{x^{n+1}}{n+1} + C \), untuk \( n \ne -1 \)</p>
+</div>
+
+<h3>Integral fungsi dasar</h3>
+
+         <div class="diffeq-table-container">
+  <div class="table-scroll-wrapper">
+    <table class="diffeq-table">
+      <tr>
+    <th>Fungsi</th>
+    <th>Integral</th>
+  </tr>
+  <tr>
+    <td>\( \frac{1}{x} \)</td>
+    <td>\( \ln|x| + C \)</td>
+  </tr>
+  <tr>
+    <td>\( e^x \)</td>
+    <td>\( e^x + C \)</td>
+  </tr>
+  <tr>
+    <td>\( \sin x \)</td>
+    <td>\( -\cos x + C \)</td>
+  </tr>
+  <tr>
+    <td>\( \cos x \)</td>
+    <td>\( \sin x + C \)</td>
+  </tr>
+  <tr>
+    <td>\( \sec^2 x \)</td>
+    <td>\( \tan x + C \)</td>
+  </tr>
+  <tr>
+    <td>\( \frac{1}{1+x^2} \)</td>
+    <td>\( \tan^{-1} x + C \)</td>
+  </tr>
+</table>
+</div>
+</div>
+</div>
+</section>
+
+        <section id="teknik" class="section">
+
+<h2><i class="fas fa-tools"></i>Teknik dasar integrasi</h2>
+<div class="example">
+<h3>Substitusi</h3>
+<p>Gunakan ketika fungsi hasil turunan “tersembunyi” dalam integran.</p>
+<p>Contoh:</p>
+<div class="formula">
+\( \int 2x(x^2+1)^3\,dx \) <br>
+\( u = x^2+1,\quad du = 2x\,dx \) <br>
+\( \int u^3\,du = \frac{u^4}{4} + C \)
+</div>
+
+<h3>Parsial</h3>
+<p>Gunakan rumus:</p>
+<div class="formula">
+\( \int u\,dv = uv - \int v\,du \)
+</div>
+
+<h3>Pecahan parsial</h3>
+<p>Gunakan rumus:</p>
+  <div class="formula">
+\( \int \frac{1}{x^2 - 1}\,dx = \left(\frac{1}{2(x-1)} - \frac{1}{2(x+1)}\right)\,dx \)</div>
+
+
+
+<h3>Makna geometris integral</h2>
+<p>\( \int_a^b f(x)\,dx \) dapat diartikan sebagai:</p>
+<ul>
+  <li>Luas di bawah kurva antara \( x = a \) dan \( x = b \)</li>
+  <li>Jika kurva di bawah sumbu x, luasnya bernilai negatif (area signed)</li>
+</ul>
+
+
+<h3>Ketika integral tidak dapat diselesaikan secara eksak</h2>
+<p>Beberapa fungsi tidak bisa diintegralkan secara aljabar, contohnya:</p>
+<ul>
+  <li>\( \int e^{-x}\,dx \)</li>
+  <li>\( \int \sin(x^2)\,dx \)</li>
+</ul>
+
+<p>Fungsi-fungsi ini hanya bisa diselesaikan:
+<ul>
+  <li>Dengan pendekatan numerik (trapesium, Simpson)</li>
+  <li>Atau dalam bentuk fungsi khusus</li>
+</ul>
+</p>
+
+<h3>Hubungan ke integral tak wajar</h2>
+<p>Sekarang kita bisa pahami kenapa integral tak wajar perlu pendekatan limit:
+<ul>
+  <li>Karena batasnya tak hingga atau fungsi tidak terdefinisi</li>
+</ul>
+</p>
+<p>Tapi cara menghitungnya tetap pakai aturan dasar integral, lalu tambahkan limit</p>
+
+<p>Misalnya:</p>
+<div class="formula">
+\( \int_1^\infty \frac{1}{x^2}\,dx = \lim_{b \to \infty} \int_1^b \frac{1}{x^2}\,dx = \left[ \frac{-1}{x} \right]_1^b = 1 \)</div>
+
+</div>
+</section>
+
+        <section id="definisi" class="section">
+
+<h2> <i class="fas fa-info-circle"></i>Definisi integral tak wajar</h2>
+<div class="example">
+<p>Integral disebut tak wajar (improper) jika:</p>
+<ul>
+  <li>Salah satu atau kedua batasnya tak hingga</li>
+  <li>\( \int_a^\infty f(x)\,dx \), \( \int_{-\infty}^b f(x)\,dx \), \( \int_{-\infty}^\infty f(x)\,dx \)</li>
+  <li>Fungsi tak terdefinisi di salah satu batas</li>
+</ul>
+<p>Misalnya fungsi tidak terdefinisi karena pembagian nol, akar negatif, dll.</p>
+<p>\( \int_0^1 \frac{1}{x^p}\,dx \) (x = 0 menyebabkan fungsi tak terdefinisi jika p ≥ 1)</p>
+</div>
+</section>
+
+        <section id="penyelesaian" class="section">
+
+<h2><i class="fas fa-calculator"></i>Cara menyelesaikan integral tak wajar</h2>
+<p>Kita tidak langsung menghitung seperti biasa, tapi harus menggunakan limit.</p>
+
+<div class="example">
+<h3>Batas tak hingga</h3>
+<p>Contoh:</p>
+  <div class="formula">
+\( \int_1^\infty \frac{1}{x^2}\,dx = \lim_{b \to \infty} \int_1^b \frac{1}{x^2}\,dx = \left[ \frac{-1}{x} \right]_1^b = 1 \)</div>
+<p>Ini adalah contoh bentuk konvergen (karena limitnya ada dan berhingga).</p>
+
+<h3>Fungsi tidak terdefinisi</h3>
+<p>Contoh:</p>
+<div class="formula">
+\( \int_0^1 \frac{1}{\sqrt{x}}\,dx = \lim_{a \to 0^+} \int_a^1 x^{-\frac{1}{2}}\,dx = \left[ 2\sqrt{x} \right]_a^1 = 2 - 0 = 2 \)</div>
+<p>Ini adalah konvergen.</p>
+</div>
+</section>
+
+        <section id="kapan" class="section">
+
+<h2><i class="fas fa-exclamation-triangle"></i>Kapan integral tak wajar gagal?</h2>
+<div class="example">
+<p>Kalau limitnya:</p>
+<ul>
+  <li>Tidak ada,</li>
+  <li>Menuju \( \infty \) atau \( -\infty \),</li>
+  <li>Atau fungsi terlalu ekstrem (divergen),</li>
+</ul>
+<p>Maka integralnya divergen.</p>
+
+<p>Contoh:</p>
+<div class="formula">
+  \( \int_1^\infty \frac{1}{x}\,dx = \lim_{b \to \infty} (\ln b - \ln 1) = \infty \) (Divergen)
+  </div>
+</div>
+</section>
+
+        <section id="uji" class="section">
+
+<h2><i class="fas fa-check-circle"></i>Uji konvergensi</h2>
+<div class="example">
+
+<h3>Perbandingan langsung</h3>
+
+<div class="formula">Jika \( f(x) \leq g(x) \) dan \( \int_1^\infty g(x)\,dx \) konvergen, maka \( \int_1^\infty f(x)\,dx \) juga konvergen</div>
+
+<h3>Limit comparison test</h3>
+<p>Bandingkan dua fungsi dengan limit:</p>
+<div class="formula">
+\( \lim_{x \to \infty} \frac{f(x)}{g(x)} = L \), di mana \( 0 &lt; L &lt; \infty \)</div>
+<p>
+Kedua fungsi punya sifat konvergen/divergen yang sama.</p>
+</div>
+</section>
+
+        <section id="video" class="section">
+
+<div class="example">
+<h2><i class="fas fa-video"></i>Video Pembelajaran Integral Tak Wajar</h2>
+  <div class="video-grid">
+<iframe width="410" height="auto" src="https://www.youtube.com/embed/ABeZDu_YZ94?si=wi5vp4miSjw9D8uD" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+</div>
+        <div class="con-kuis">
+                  <p>Yuk, kita cek sejauh mana kamu paham! Klik tombol di bawah untuk mulai kuisnya.</p>
+
+          <a href="SOALMATERI2.html" class="btn-kuis">Mulai Kuis!
+          </a>
+
+         
+    </div>
+  </div>
+
+      </section>
+
+
+
+        <div class="navigation-buttons">
+          <a href="bilangan_kompleks.html" class="btn-anim">
+            <i class="fas fa-arrow-left"></i> Materi Sebelumnya
+          </a>
+           <a href="barisan_deret_tak_hingga.html" class="btn-anim">
+            Materi Selanjutnya <i class="fas fa-arrow-right"></i>
+          </a>
+
+        </div>
+
+
+      </div>
+        <div data-aos="fade" class="sidebar">
+        <div style="overflow-y: auto;  max-height: 80vh;" class="sidebar-menu responsive-sidebar" id="responsiveMenu">
+          <h3><i class="fas fa-list-ul"></i> Daftar Isi</h3>
+<a href="#pengantar">Apa itu Integral?</a>
+<a href="#aturan">Aturan-aturan Dasar Integral</a>
+<a href="#teknik">Teknik Dasar Integrasi</a>
+<a href="#definisi">Definisi Integral Tak Wajar</a>
+<a href="#penyelesaian">Cara Menyelesaikan Integral Tak Wajar</a>
+<a href="#kapan">Kapan Integral Tak Wajar Gagal?</a>
+<a href="#uji">Uji Konvergensi</a>
+<a href="#video">Video Pembelajaran</a>
+
+        </div>
+      </div>
+          </div>
+  </div>
+
+
+
+
+<div class="team-container">
+    <div class="team-member">
+        <img src="nanda.jpg" alt="Anggota 1">
+        <h3>Nanda Raissa</h3>
+        <p>247006111108</p>
+        <div class="social-links">
+            <a href="https://www.instagram.com/nanda_rsa?igsh=ajhxcXB1cHd0azlw" target="_blank">
+                <i class="fab fa-instagram"></i>
+            </a>
+        </div>
+    </div>
+
+    <div class="team-member">
+        <img src="annisa3.jpg" alt="Anggota 1">
+        <h3>Annisa Safira Wibowo</h3>
+        <p>247006111101</p>
+        <div class="social-links">
+            <a href="https://www.instagram.com/dfaviera?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank">
+                <i class="fab fa-instagram"></i>
+            </a>
+        </div>
+    </div>
+
+    <div class="team-member">
+        <img src="agniya.jpg" alt="Anggota 1">
+        <h3>Agniya Azzahra</h3>
+        <p>247006111090</p>
+        <div class="social-links">
+            <a href="https://www.instagram.com/qubialy_/?utm_source=ig_web_button_share_sheet" target="_blank">
+                <i class="fab fa-instagram"></i>
+            </a>
+
+        </div>
+    </div>
+
+    <div class="team-member">
+        <img src="diyani.jpg" alt="Anggota 1">
+        <h3>Diyani Rahayu Nur'aeni</h3>
+        <p>247006111115</p>
+        <div class="social-links">
+            <a href="https://www.instagram.com/dyanryn_?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank">
+                <i class="fab fa-instagram"></i>
+            </a>
+        </div>
+    </div>
+</div>
+</div>
+
+<script src="https://kit.fontawesome.com/a076d05399.js"></script>
+
+<footer class="footer">
+    <div class="footer-content">
+        <div class="footer-logo font">
+           <b><span style="color: white; font-family: 'Playfair Display', serif; font-size: 25px; vertical-align: 8px;">Calculzy</span></b>
+
+        </div>
+
+    <div class="footer-bottom center flex">
+        <p>&copy; 2025 Kelompok Calculzy | Universitas Siliwangi.</p>
+    </div>
+  </div>
+</footer>
+
+<script type="text/javascript" src="script.js"></script>
+
+</body>
+</html>

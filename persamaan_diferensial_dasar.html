@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <title>Persamaan Diferensial Dasar | Calculzy</title>
+  <style>
+
+    [data-theme="light"] .logo {
+      color: black;
+    }
+
+    [data-theme="light"] .nav-links a {
+      color: black;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--dark);
+      color: var(--text);
+      transition: all 0.3s ease;
+      line-height: 1.6;
+    }
+
+
+
+    .theme-toggle {
+      background: none;
+      border: none;
+      color: var(--lighter);
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+
+    .theme-toggle:hover {
+      transform: rotate(30deg);
+    }
+
+    .material-container {
+      max-width: 1200px;
+      margin: 0rem auto 4rem;
+    }
+
+    .material-header {
+      text-align: center;
+      margin-bottom: 4rem;
+      position: relative;
+    }
+
+    .material-header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.8rem;
+      margin-bottom: 1.5rem;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .material-header p {
+      font-size: 1.1rem;
+      color: var(--gray);
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+
+
+
+
+
+
+    .material-content {
+display: grid
+;
+    grid-template-columns: 1fr 70px;
+    gap: 12rem;
+    margin-left: -80px;
+    }
+
+
+
+.sidebar {
+  position: sticky;
+  top: 120px;
+  height: fit-content;
+  margin-left: -125px; /* tambahkan ini agar tidak nempel ke tepi kiri grid */
+  width: 300px;
+}
+
+
+    .sidebar-menu {
+      padding: 1.5rem;
+      background-color: var(--card);
+      backdrop-filter: blur(10px);
+      border-radius: 1rem;
+      padding: 1.5rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .sidebar-menu h3 {
+      font-size: 1.2rem;
+      margin-bottom: 1.5rem;
+      color: var(--primary-light);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .sidebar-menu ul {
+      list-style: none;
+    }
+
+    .sidebar-menu li {
+      margin-bottom: 0.8rem;
+    }
+
+    .sidebar-menu a {
+      color: var(--text);
+      text-decoration: none;
+      transition: color 0.3s;
+      display: block;
+      padding: 0.5rem 0;
+      border-left: 3px solid transparent;
+    }
+
+    .sidebar-menu a:hover, .sidebar-menu a.active {
+      color: var(--primary);
+      border-left: 3px solid var(--primary);
+    }
+
+    .section {
+      margin-bottom: 3rem;
+    }
+
+    .section h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      margin-bottom: 1.5rem;
+      color: var(--lighter);
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .section h2 i {
+      color: var(--primary);
+    }
+
+    .section p {
+      margin-bottom: 1.5rem;
+      line-height: 1.8;
+    }
+
+    .formula {
+      background-color: rgba(99, 102, 241, 0.1);
+      border-left: 4px solid var(--primary);
+      padding: 1.5rem;
+      border-radius: 0 0.5rem 0.5rem 0;
+      margin: 1.5rem 0;
+font-family: 'Poppins', sans-serif;
+      font-size: 1.1rem;
+      overflow-x: auto;
+    }
+
+    .example {
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+    }
+
+
+
+
+
+
+
+
+    .example h3 {
+      color: var(--primary-light);
+      margin-bottom: 1rem;
+      font-size: 1.2rem;
+    }
+
+    .visualization {
+      background-color: rgba(15, 23, 42, 0.5);
+      border-radius: 0.5rem;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+      text-align: center;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .visualization img {
+      max-width: 100%;
+      border-radius: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .visualization p {
+      font-size: 0.9rem;
+      color: white;
+    }
+
+    .btn-anim {
+      padding: 0.8rem 1.8rem;
+      font-size: 1rem;
+      font-weight: 500;
+      border: none;
+      border-radius: 50px;
+      background: var(--gradient);
+      color: white;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      z-index: 1;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+
+    .btn-anim:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 30px rgba(99, 102, 241, 0.4);
+    }
+
+    .btn-anim::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: 0.5s;
+      z-index: -1;
+    }
+
+    .btn-anim:hover::before {
+      left: 100%;
+    }
+
+    .navigation-buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 3rem;
+      padding-top: 2rem;
+    }
+
+    @media (max-width: 992px) {
+      .material-content {
+        grid-template-columns: 1fr;
+      }
+      
+      .sidebar {
+        position: static;
+        order: -1;
+        margin-bottom: 2rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .material-header h1 {
+        font-size: 2.2rem;
+      }
+      
+      .diffeq-container{
+        width: 100%!important;
+        height: 300px!important;
+      }
+      .section h2 {
+        font-size: 1.5rem;
+      }
+    }
+
+ :root {
+    --math-blue: #4fc3f7;
+    --math-pink: #ff4081;
+    --math-green: #64ffda;
+    --bg-dark: #121212;
+    --grid-color: rgba(255,255,255,0.1);
+  }
+  
+ 
+  
+ .diffeq-container {
+      width: 60%;
+      height: 400px; /* Increased height */
+      position: relative;
+      border-radius: 12px;
+      overflow: hidden;
+      background: linear-gradient(145deg, #1a1a2e 0%, #16213e 100%);
+      box-shadow: 0 0 60px rgba(127, 0, 255, 0.4);
+      margin: 2rem auto;
+    }
+
+    .diffeq-visual {
+      width: 100%;
+      height: 100%;
+      position: relative;
+    }
+
+    .coordinate-plane {
+      position: absolute;
+      width: 90%;
+      height: 90%;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    /* Enhanced grid and axes */
+    .x-axis, .y-axis {
+      position: absolute;
+      background: rgba(79, 195, 247, 0.8);
+      box-shadow: 0 0 10px rgba(79, 195, 247, 0.5);
+    }
+
+    .x-axis {
+      width: 100%;
+      height: 2px;
+      bottom: 50%;
+    }
+
+    .y-axis {
+      width: 2px;
+      height: 100%;
+      left: 50%;
+    }
+
+    .grid-lines {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background-image: 
+        linear-gradient(to right, rgba(79, 195, 247, 0.1) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(79, 195, 247, 0.1) 1px, transparent 1px);
+      background-size: 30px 30px;
+    }
+
+    /* Dynamic slope field */
+    .slope-field {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background-image: 
+        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30"><line x1="12" y1="15" x2="18" y2="15" stroke="%234fc3f7" stroke-width="1.5" stroke-opacity="0.6"/></svg>'),
+        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30"><line x1="15" y1="12" x2="15" y2="18" stroke="%234fc3f7" stroke-width="1.5" stroke-opacity="0.6"/></svg>');
+      opacity: 0.7;
+      animation: pulseOpacity 6s ease-in-out infinite;
+    }
+
+    /* Solution curve animation */
+    .solution-curve {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(ellipse at center, rgba(100, 255, 218, 0.3) 0%, transparent 70%);
+      clip-path: path('M10,90 Q50,30 90,50');
+      animation: 
+        drawSolution 8s ease-in-out infinite,
+        glowPulse 4s ease-in-out infinite alternate;
+    }
+
+    /* Initial point with pulsing effect */
+    .initial-point {
+      position: absolute;
+      width: 14px;
+      height: 14px;
+      background: #64ffda;
+      border-radius: 50%;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      box-shadow: 0 0 20px #64ffda;
+      animation: pulse 2s ease-in-out infinite;
+      z-index: 2;
+    }
+
+    /* Floating equation display */
+    .equation-display {
+      position: absolute;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 1rem;
+      color: white;
+      display: flex;
+      align-items: center;
+      background: rgba(15, 23, 42, 0.7);
+      padding: 12px 24px;
+      border-radius: 50px;
+      backdrop-filter: blur(5px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      z-index: 3;
+    }
+
+    /* Animations */
+    @keyframes drawSolution {
+      0%, 100% { clip-path: path('M10,90 Q50,80 90,90'); }
+      50% { clip-path: path('M10,90 Q50,20 90,50'); }
+    }
+
+    @keyframes glowPulse {
+      0%, 100% { opacity: 0.7; }
+      50% { opacity: 0.9; }
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: translate(-50%, -50%) scale(1); }
+      50% { transform: translate(-50%, -50%) scale(1.2); }
+    }
+
+    @keyframes pulseOpacity {
+      0%, 100% { opacity: 0.6; }
+      50% { opacity: 0.9; }
+    }
+
+    /* Remove all controls */
+    .diffeq-controls, .initial-condition, .control-btn {
+      display: none !important;
+    }
+
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <a href="index.html" class="logo">Calculzy</a>
+    <div class="nav-links">
+      <a href="index.html">Beranda</a>
+             <a class="dropdown-btn">Daftar Isi</a>
+
+            <div class="dropdown">
+                <div class="dropdown-content" id="desktopDropdown">
+                  <a href="#pengertian">Pengertian PD</a><br>
+<a href="#orde">Orde PD</a><br>
+<a href="#jenis">Jenis-Jenis PD</a><br>
+<a href="#tabel">Tabel Ringkasan</a><br>
+<a href="#video">Video Pembelajaran</a><br>
+
+
+                </div>
+            </div>
+      <button id="themeToggle" class="theme-toggle">
+        <i class="fas fa-moon"></i>
+      </button>
+    </div>
+  </nav>
+<div class="hero-section flex-center">
+    <div class="material-header">
+      <h1 data-aos="fade" data-aos-delay="200" class="margin-top-70">BAB V: Persamaan Diferensial Dasar</h1>
+      <div class="flex-center">
+<div class="diffeq-container">
+  <!-- Visualization Canvas -->
+  <div class="diffeq-visual">
+    <div class="coordinate-plane">
+      <div class="x-axis"></div>
+      <div class="y-axis"></div>
+      <div class="grid-lines"></div>
+      <div class="slope-field"></div>
+      <div class="solution-curve"></div>
+      <div class="initial-point"></div>
+    </div>
+  </div>
+  
+  <!-- Equation Display -->
+  <div class="equation-display">
+    <span class="dy">dy</span><span class="dx">dx</span> 
+    <span class="equals">=</span> 
+    <span class="function">x - y</span>
+  </div>
+  
+</div>
+</div>
+    </div>
+  </div>
+            <div class="particles" id="particles"></div>
+  <div class="material-container">
+
+    <div class="material-content">
+
+      <div data-aos="fade-up" class="main-content">
+        <section id="pengertian" class="section">
+          <h2><i class="fas fa-book-open"></i> Pengertian Persamaan Diferensial</h2>
+          <p>Persamaan diferensial adalah persamaan yang melibatkan fungsi tak dikenal dan turunannya. Biasanya digunakan untuk memodelkan perubahan yang terjadi dalam sistem seperti fisika, ekonomi, atau biologi.</p>
+          
+          <div class="example">
+            <h3>Contoh Model</h3>
+            <div class="formula">
+              \[ \frac{dP}{dt} = kP \]
+            </div>
+            <p>Model pertumbuhan populasi ini menunjukkan bahwa laju perubahan populasi (dP/dt) sebanding dengan populasi saat itu (P).</p>
+          </div>
+        </section>
+
+        <section id="orde" class="section">
+          <h2><i class="fas fa-sort-numeric-up"></i> Orde Persamaan Diferensial</h2>
+          <p>Orde adalah tingkat tertinggi dari turunan yang muncul dalam persamaan. Semakin tinggi orde, semakin kompleks modelnya.</p>
+          
+          <div class="example">
+            <h3>Contoh Orde</h3>
+            <ul>
+              <li>Orde 1: \( \frac{dy}{dx} = x + y \)</li>
+              <li>Orde 2: \( \frac{d^2y}{dx^2} + 3\frac{dy}{dx} + y = 0 \)</li>
+            </ul>
+          </div>
+        </section>
+
+        <section id="jenis" class="section">
+          <h2><i class="fas fa-shapes"></i> Jenis-Jenis Persamaan Diferensial Orde 1</h2>
+          
+          <div class="example">
+            <h3>1. PD Variabel Terpisah</h3>
+            <p>Persamaan yang dapat dipisah menjadi fungsi \( x \) dan \( y \).</p>
+            <div class="formula">
+              \[ \frac{dy}{dx} = g(x)f(y) \Rightarrow \frac{1}{f(y)}dy = g(x)dx \]
+            </div>
+            <p><strong>Contoh:</strong></p>
+            <div class="formula">
+              \[ \frac{dy}{dx} = xy \Rightarrow \frac{1}{y}dy = xdx \]
+              \[ \ln|y| = \frac{x^2}{2} + C \Rightarrow y = Ce^{x^2/2} \]
+            </div>
+          </div>
+
+          <div class="example">
+            <h3>2. PD Eksak</h3>
+            <p>Suatu PD berbentuk \( M(x,y)dx + N(x,y)dy = 0 \) disebut eksak jika:</p>
+            <div class="formula">
+              \[ \frac{\partial M}{\partial y} = \frac{\partial N}{\partial x} \]
+            </div>
+            <p><strong>Contoh:</strong></p>
+            <div class="formula">
+              \[ (2xy + 1)dx + (x^2 + 3y^2)dy = 0 \]
+              \[ F(x,y) = x^2y + x + y^3 = C \]
+            </div>
+          </div>
+
+          <div class="example">
+            <h3>3. PD Linear Orde 1</h3>
+            <p>Bentuk umum:</p>
+            <div class="formula">
+              \[ \frac{dy}{dx} + P(x)y = Q(x) \]
+            </div>
+            <p><strong>Langkah penyelesaian:</strong></p>
+            <ol>
+              <li>Hitung faktor integrasi: \( \mu(x) = e^{\int P(x)dx} \)</li>
+              <li>Kalikan seluruh persamaan dengan \( \mu(x) \)</li>
+              <li>Gunakan: \( \frac{d}{dx}[\mu(x)y] = \mu(x)Q(x) \)</li>
+              <li>Integrasi dan selesaikan \( y \)</li>
+            </ol>
+            <p><strong>Contoh:</strong></p>
+            <div class="formula">
+              \[ \frac{dy}{dx} + 2y = x \Rightarrow \mu(x) = e^{2x} \]
+              \[ \frac{d}{dx}(e^{2x}y) = xe^{2x} \]
+              \[ e^{2x}y = \frac{1}{2}xe^{2x} - \frac{1}{4}e^{2x} + C \]
+              \[ y = \frac{1}{2}x - \frac{1}{4} + Ce^{-2x} \]
+            </div>
+          </div>
+        </section>
+
+        <section id="tabel" class="section">
+          <h2><i class="fas fa-table"></i> Tabel Ringkasan</h2>
+         <div class="diffeq-table-container">
+  <div class="table-scroll-wrapper">
+    <table class="diffeq-table">
+      <thead>
+        <tr>
+          <th>Jenis PD</th>
+          <th>Ciri</th>
+          <th>Contoh</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Variabel Terpisah</td>
+          <td>\(\frac{dy}{dx} = g(x)f(y)\)</td>
+          <td>\(\frac{dy}{dx} = xy\)</td>
+        </tr>
+        <tr>
+          <td>Eksak</td>
+          <td>\(\frac{\partial M}{\partial y} = \frac{\partial N}{\partial x}\)</td>
+          <td>\((2xy+1)dx + (x^2+3y^2)dy = 0\)</td>
+        </tr>
+        <tr>
+          <td>Linear Orde 1</td>
+          <td>\(\frac{dy}{dx} + P(x)y = Q(x)\)</td>
+          <td>\(\frac{dy}{dx} + 2y = x\)</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+        </section>
+        <section id="video" class="section">
+
+   <div class="example">
+<h2><i class="fas fa-video"></i>Video Pembelajaran Persamaan Diferensial Dasar</h2>
+  <div class="video-grid">
+<iframe width="410px" height="auto" src="https://www.youtube.com/embed/videoseries?si=sQmboncjKxi0xoSi&amp;list=PLYqUetE2w8We54lrD875LbBObCAOvtouv" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+</div>
+        <div class="con-kuis">
+                  <p>Yuk, kita cek sejauh mana kamu paham! Klik tombol di bawah untuk mulai kuisnya.</p>
+
+          <a href="SOALMATERI5.html" class="btn-kuis">Mulai Kuis!
+          </a>
+
+        </div>
+        </div>
+                </section>
+
+
+
+        <div class="navigation-buttons">
+          <a href="pengantar_diferensial_parsial.html" class="btn-anim">
+            <i class="fas fa-arrow-left"></i> Materi Sebelumnya
+          </a>
+           <a href="pengantar_integral_lipat.html" class="btn-anim">
+            Materi Selanjutnya <i class="fas fa-arrow-right"></i>
+          </a>
+
+        </div>
+
+</div>
+            <div data-aos="fade" class="sidebar">
+        <div style="overflow-y: auto;  max-height: 80vh;" class="sidebar-menu responsive-sidebar" id="responsiveMenu">
+          <h3><i class="fas fa-list-ul"></i> Daftar Isi</h3>
+<a href="#pengertian">Pengertian PD</a><br>
+<a href="#orde">Orde PD</a><br>
+<a href="#jenis">Jenis-Jenis PD</a><br>
+<a href="#tabel">Tabel Ringkasan</a><br>
+<a href="#video">Video Pembelajaran</a><br>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="team-container">
+    <div class="team-member">
+      <img src="nanda.jpg" alt="Nanda Raissa">
+      <h3>Nanda Raissa</h3>
+      <p>247006111108</p>
+      <div class="social-links">
+        <a href="https://www.instagram.com/nanda_rsa" target="_blank">
+          <i class="fab fa-instagram"></i>
+        </a>
+      </div>
+    </div>
+
+    <div class="team-member">
+      <img src="annisa3.jpg" alt="Annisa Safira">
+      <h3>Annisa Safira W.</h3>
+      <p>247006111101</p>
+      <div class="social-links">
+        <a href="https://www.instagram.com/dfaviera" target="_blank">
+          <i class="fab fa-instagram"></i>
+        </a>
+      </div>
+    </div>
+
+    <div class="team-member">
+      <img src="agniya.jpg" alt="Agniya Azzahra">
+      <h3>Agniya Azzahra</h3>
+      <p>247006111090</p>
+      <div class="social-links">
+        <a href="https://www.instagram.com/qubialy_" target="_blank">
+          <i class="fab fa-instagram"></i>
+        </a>
+      </div>
+    </div>
+
+    <div class="team-member">
+      <img src="diyani.jpg" alt="Diyani Rahayu">
+      <h3>Diyani Rahayu N.</h3>
+      <p>247006111115</p>
+      <div class="social-links">
+        <a href="https://www.instagram.com/dyanryn_" target="_blank">
+          <i class="fab fa-instagram"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-logo">Calculzy</div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 Kelompok Calculzy | Universitas Siliwangi.</p>
+      </div>
+    </div>
+  </footer>
+<script type="text/javascript" src="script.js"></script>
+<script>
+    // Auto-animate the solution curve
+    document.addEventListener('DOMContentLoaded', function() {
+      const solutionCurve = document.querySelector('.solution-curve');
+      
+      function animateCurve() {
+        solutionCurve.style.animation = 'none';
+        setTimeout(() => {
+          solutionCurve.style.animation = '';
+        }, 10);
+      }
+      
+      // Animate every 8 seconds
+      setInterval(animateCurve, 8000);
+      
+      // Initial animation
+      animateCurve();
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <title>Bilangan Kompleks | Calculzy</title>
+  <style>
+
+    [data-theme="light"] .logo {
+      color: black;
+    }
+
+
+
+    [data-theme="light"] .nav-links a {
+      color: black;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--dark);
+      color: var(--text);
+      transition: all 0.3s ease;
+      line-height: 1.6;
+    }
+
+
+
+    .theme-toggle {
+      background: none;
+      border: none;
+      color: var(--lighter);
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+
+    .theme-toggle:hover {
+      transform: rotate(30deg);
+    }
+
+    .material-container {
+      max-width: 1200px;
+      margin: 0rem auto 4rem;
+    }
+
+    .material-header {
+      text-align: center;
+      margin-bottom: 4rem;
+      position: relative;
+    }
+
+
+
+    .material-header p {
+      font-size: 1.1rem;
+      color: var(--gray);
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+
+
+
+
+
+
+    .material-content {
+display: grid
+;
+    grid-template-columns: 1fr 70px;
+    gap: 12rem;
+    margin-left: -80px;
+    }
+
+
+
+.sidebar {
+  position: sticky;
+  top: 120px;
+  height: fit-content;
+  margin-left: -125px; /* tambahkan ini agar tidak nempel ke tepi kiri grid */
+  width: 300px;
+}
+
+
+    .sidebar-menu {
+      padding: 1.5rem;
+      background-color: var(--card);
+      backdrop-filter: blur(10px);
+      border-radius: 1rem;
+      padding: 1.5rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .sidebar-menu h3 {
+      font-size: 1.2rem;
+      margin-bottom: 1.5rem;
+      color: var(--primary-light);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .sidebar-menu ul {
+      list-style: none;
+    }
+
+    .sidebar-menu li {
+      margin-bottom: 0.8rem;
+    }
+
+    .sidebar-menu a {
+      color: var(--text);
+      text-decoration: none;
+      transition: color 0.3s;
+      display: block;
+      padding: 0.5rem 0;
+      border-left: 3px solid transparent;
+    }
+
+    .sidebar-menu a:hover, .sidebar-menu a.active {
+      color: var(--primary);
+      border-left: 3px solid var(--primary);
+    }
+
+    .section {
+      margin-bottom: 3rem;
+    }
+
+    .section h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      margin-bottom: 1.5rem;
+      color: var(--lighter);
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .section h2 i {
+      color: var(--primary);
+    }
+
+    .section p {
+      margin-bottom: 1.5rem;
+      line-height: 1.8;
+    }
+
+    .formula {
+      background-color: rgba(99, 102, 241, 0.1);
+      border-left: 4px solid var(--primary);
+      padding: 1.5rem;
+      border-radius: 0 0.5rem 0.5rem 0;
+      margin: 1.5rem 0;
+font-family: 'Poppins', sans-serif;
+      font-size: 1.1rem;
+      overflow-x: auto;
+    }
+
+    .example {
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+    }
+
+
+
+
+.material-header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.8rem;
+    margin-bottom: 1.5rem;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+
+
+    .example h3 {
+      color: var(--primary-light);
+      margin-bottom: 1rem;
+      font-size: 1.2rem;
+    }
+
+    .visualization {
+      background-color: rgba(15, 23, 42, 0.5);
+      border-radius: 0.5rem;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+      text-align: center;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .visualization img {
+      max-width: 100%;
+      border-radius: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .visualization p {
+      font-size: 0.9rem;
+      color: white;
+    }
+
+    .btn-anim {
+      padding: 0.8rem 1.8rem;
+      font-size: 1rem;
+      font-weight: 500;
+      border: none;
+      border-radius: 50px;
+      background: var(--gradient);
+      color: white;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      z-index: 1;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+
+    .btn-anim:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 30px rgba(99, 102, 241, 0.4);
+    }
+
+    .btn-anim::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: 0.5s;
+      z-index: -1;
+    }
+
+    .btn-anim:hover::before {
+      left: 100%;
+    }
+
+    .navigation-buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 3rem;
+      padding-top: 2rem;
+    }
+
+    @media (max-width: 992px) {
+      .material-content {
+        grid-template-columns: 1fr;
+      }
+      
+      .sidebar {
+        position: static;
+        order: -1;
+        margin-bottom: 2rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .material-header h1 {
+        font-size: 2.2rem;
+      }
+      
+      .section h2 {
+        font-size: 1.5rem;
+      }
+    }
+
+
+/* Original styles (unchanged) */
+.complex-animation-container {
+  box-shadow: 0 0 50px rgba(127, 0, 255, 0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 400px;
+  background: rgba(15, 23, 42, 0.7);
+  border-radius: 16px;
+  position: relative;
+  overflow: hidden;
+  margin: 2rem auto;
+  max-width: 800px;
+}
+
+.complex-plane {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.axis {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.x-axis {
+  width: 100%;
+  height: 1px;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+}
+
+.y-axis {
+  width: 1px;
+  height: 100%;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
+}
+
+.complex-number {
+  position: absolute;
+  font-family: 'Courier New', monospace;
+  font-weight: bold;
+  color: #a5b4fc;
+  font-size: 1.2rem;
+  padding: 0.5rem;
+  border-radius: 4px;
+  background: rgba(99, 102, 241, 0.2);
+  animation: float 8s ease-in-out infinite;
+  animation-delay: var(--delay);
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.complex-circle {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  border: 2px dashed rgba(165, 180, 252, 0.5);
+  border-radius: 50%;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  animation: pulse 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: 
+      translate(-50%, -50%)
+      rotate(0deg)
+      translateX(150px)
+      rotate(0deg);
+  }
+  25% {
+    transform: 
+      translate(-50%, -50%)
+      rotate(90deg)
+      translateX(150px)
+      rotate(-90deg);
+  }
+  50% {
+    transform: 
+      translate(-50%, -50%)
+      rotate(180deg)
+      translateX(150px)
+      rotate(-180deg);
+  }
+  75% {
+    transform: 
+      translate(-50%, -50%)
+      rotate(270deg)
+      translateX(150px)
+      rotate(-270deg);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.7; transform: translate(-50%, -50%) scale(1); }
+  50% { opacity: 0.3; transform: translate(-50%, -50%) scale(1.1); }
+}
+
+/* Only these changes will apply at 425px or smaller */
+@media (max-width: 425px) {
+  .complex-animation-container {
+    height: 300px; /* Slightly smaller container */
+    max-width: 95%; /* More edge padding */
+  }
+  
+  .complex-circle {
+    width: 150px; /* Smaller circle */
+    height: 150px;
+    border-width: 1px; /* Thinner border */
+    opacity: 0.8; /* Slightly more transparent */
+  }
+  
+  .complex-number {
+    font-size: 1rem; /* Slightly smaller text */
+    transform: 
+      translate(-50%, -50%)
+      rotate(0deg)
+      translateX(110px) /* Closer to center */
+      rotate(0deg);
+  }
+  
+  @keyframes float {
+    0%, 100% {
+      transform: 
+        translate(-50%, -50%)
+        rotate(0deg)
+        translateX(110px) /* Matches new distance */
+        rotate(0deg);
+    }
+    25% {
+      transform: 
+        translate(-50%, -50%)
+        rotate(90deg)
+        translateX(110px)
+        rotate(-90deg);
+    }
+    50% {
+      transform: 
+        translate(-50%, -50%)
+        rotate(180deg)
+        translateX(110px)
+        rotate(-180deg);
+    }
+    75% {
+      transform: 
+        translate(-50%, -50%)
+        rotate(270deg)
+        translateX(110px)
+        rotate(-270deg);
+    }
+  }
+}
+/* DARK/LIGHT MODE ADAPTATION */
+@media (prefers-color-scheme: light) {
+  .complex-animation-container {
+    background: rgba(237, 242, 247, 0.9);
+    box-shadow: 0 0 30px rgba(99, 102, 241, 0.2);
+  }
+  
+  .axis {
+    background: rgba(0, 0, 0, 0.1);
+  }
+  
+  .complex-number {
+    color: #4f46e5;
+    background: rgba(99, 102, 241, 0.1);
+  }
+  
+  .complex-circle {
+    border-color: rgba(79, 70, 229, 0.3);
+  }
+}
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <a href="index.html" class="logo">Calculzy</a>
+    <div class="nav-links">
+      <a href="index.html">Beranda</a>
+                      <a class="dropdown-btn">Daftar Isi</a>
+
+             <div class="dropdown">
+                <div class="dropdown-content" id="desktopDropdown">
+                    <a href="#pengantar">Mengapa Butuh Bilangan Kompleks?</a>
+                    <a href="#pengertian">Pengertian Bilangan Kompleks</a>
+                    <a href="#operasi">Operasi Dasar Pada Bilangan Kompleks</a>
+                    <a href="#konjugat">Konjugat dan Modulus</a>
+                    <a href="#representasi">Representasi di Bidang Kompleks</a>
+                    <a href="#polar">Bentuk Polar dan Bentuk Euler</a>
+                    <a href="#teorema">Teorema De Moivre</a>
+                    <a href="#video">Video Pembelajaran</a>
+                </div>
+            </div>
+
+
+            <!-- Mobile menu button -->
+      <button id="themeToggle" class="theme-toggle">
+        <i class="fas fa-moon"></i>
+      </button>
+    </div>
+
+  </nav>
+    <div class="material-header hero-section">
+      <h1 class="margin-top-70" data-aos="fade" data-aos-delay="50">BAB I: Bilangan Kompleks</h1>
+
+  <div class="complex-animation-container">
+  <div class="complex-plane">
+    <!-- Real and Imaginary Axes -->
+    <div class="axis x-axis"></div>
+    <div class="axis y-axis"></div>
+    
+    <!-- Animated Complex Numbers -->
+    <div class="complex-number" style="--delay: 0s">3 + 2i</div>
+    <div class="complex-number" style="--delay: 0.5s">-1 + 4i</div>
+    <div class="complex-number" style="--delay: 1s">2 - 3i</div>
+    <div class="complex-number" style="--delay: 1.5s">-2 - i</div>
+    
+    <!-- Unit Circle -->
+    <div class="complex-circle"></div>
+  </div>
+</div>
+
+
+    </div>
+            <div class="particles" id="particles"></div>
+    <div class="material-container">
+
+    <div class="material-content">
+           
+      <div data-aos="fade-up" class="main-content">
+
+        <section id="pengantar" class="section">
+          <h2><i class="fas fa-book-open"></i>Mengapa Butuh Bilangan Kompleks?
+</h2>
+<div class="example">
+  <p>Masalahnya, tidak ada bilangan real yang kuadratnya negatif. Maka, untuk menyelesaikan persoalan ini, para matematikawan memperluas sistem bilangan dan memperkenalkan satuan baru bernama:</p>
+          
+          
+ <div class="formula">\( x^2 + 1 = 0 \)</div>
+  <p>Kita akan mendapatkan:</p>
+  <div class="formula">
+  \( x^2 = -1 \Rightarrow x = \sqrt{-1} \)
+</div>
+  <p>Masalahnya, tidak ada bilangan real yang kuadratnya negatif. Maka, untuk menyelesaikan persoalan ini, para matematikawan memperluas sistem bilangan dan memperkenalkan satuan baru bernama:</p>
+  <div class="formula">
+  \( i = \sqrt{-1} \)
+  </div>
+  <p>Inilah awal mula terbentuknya bilangan kompleks.</p>
+  </div>
+        </section>
+
+        <section id="pengertian" class="section">
+          <h2><i class="fas fa-shapes"></i>Pengertian Bilangan Kompleks</h2>
+<div class="example">
+           <p>Bilangan kompleks adalah bilangan yang terdiri dari dua bagian:</p>
+           <div class="formula">
+  \( z = a + bi \)
+    </div>
+
+  <p>Di mana:</p>
+  <ul>
+    <li>\( a \) adalah bagian real</li>
+    <li>\( b \) adalah bagian imajiner</li>
+    <li>\( i \) adalah satuan imajiner dengan sifat: \( i^2 = -1 \)</li>
+  </ul>
+  <p>Contoh:</p>
+  <ul>
+    <li>\( 3 + 2i \) bilangan real = 3, bilangan imajiner = 2</li>
+    <li>\( -5i \) bilangan real = 0, bagian imajiner = -5</li>
+  </ul>
+  </div>
+         </section> 
+                <section id="operasi" class="section">
+
+            <h2><i class="material-icons">calculate</i>Operasi Dasar Pada Bilangan Kompleks</h2>
+            <div class="example">
+              <h3>Penjumlahan dan pengurangan</h3>
+
+            
+  <p>Gabungkan bagian real dengan real, imajiner dengan imajiner.</p>
+  <div class="formula">
+  \( (2 + 3i) + (1 - 4i) = (2 + 1) + (3 - 4)i = 3 - i \)<br>
+  \( (4 + 5i) - (2 + i) = 2 + 4i \)
+  </div>
+    <h3>Perkalian</h3>
+  <p>Gunakan sifat distributif dan ingat bahwa \( i^2 = -1 \):</p>
+  <div class="formula">
+  \( (2 + i)(3 + 4i) = 6 + 8i + 3i + 4i^2 = 6 + 11i - 4 = 2 + 11i \)
+  </div>
+
+  <h3>Pembagian</h3>
+  <p>Gunakan konjugat dari penyebut:</p>
+  <div class="formula">
+  \[
+  \frac{3 + 2i}{1 - i} = \frac{(3 + 2i)(1 + i)}{(1 - i)(1 + i)} = \frac{3 + 3i + 2i + 2i^2}{1 + 1} = \frac{1 + 5i}{2}
+  \]
+  </div>
+  </div>
+</section>
+        <section id="konjugat" class="section">
+
+    <h2><i class="material-icons" >swap_horiz</i>Konjugat Dan Modulus</h2>
+
+
+          <div class="example">
+  <h3>Konjugat</h3>
+  <p>Konjugat dari \( z = a + bi \) adalah:</p>
+  <div class="formula">
+  \( \overline{z} = a - bi \)
+  </div>
+
+  <h3>Modulus (panjang vektor kompleks)</h3>
+  <div class="formula">
+  \( |z| = \sqrt{a^2 + b^2} \)
+  </div>
+  <p>Contoh:</p>
+    <div class="formula">
+
+  \( z = 3 + 4i \Rightarrow |z| = \sqrt{3^2 + 4^2} = \sqrt{25} = 5 \)</div>
+          </div>
+        </section>
+
+
+        <section id="representasi" class="section">
+          <h2><i class="fas material-icons" >scatter_plot</i>Representasi di Bidang Kompleks
+</h2>
+<div class="example">
+            <p>Bilangan kompleks bisa digambarkan sebagai titik di bidang datar (disebut bidang Argand):</p>
+<p>
+  <ul>
+    <li>Sumbu x = bilangan real</li>
+    <li>Sumbu y = bilangan imajiner</li>
+    <li>Titik \( z = a + bi \) titik koordinat \( (a, b) \)</li>
+  </ul>
+        </p>  
+        </div>
+      </section>
+              <section id="polar" class="section">
+
+         <h2><i class="fas material-icons">radar</i>Bentuk Polar dan Bentuk Euler</h2>
+         <div class="example">
+  <h3>Bentuk Polar</h3>
+  <div class="formula">
+  \( z = r(\cos \theta + i \sin \theta) \) <br>
+  \( r = |z| = \sqrt{a^2 + b^2} \)<br>
+  \( \theta = \tan^{-1} \left(\frac{b}{a}\right) \), sudut terhadap sumbu real
+  </div>
+
+  <h3>Bentuk Euler</h3>
+  <div class="formula">
+  \( z = re^{i\theta} \)
+  </div>
+  <p>Bentuk Euler digunakan dalam:</p>
+  <ul>
+    <li>Pemangkatan bilangan kompleks</li>
+    <li>Akar pangkat \( n \)</li>
+    <li>Operasi perkalian dan pembagian</li>
+  </ul>
+</div>
+</section>
+        <section id="teorema" class="section">
+  <h2><i class="material-icons" >functions</i>Teorema De Moivre</h2>
+  <div class="example">
+  <p>Jika:</p>
+  <div class="formula">
+  \( z = r(\cos \theta + i \sin \theta) \)
+  </div>
+
+  <p>Maka:</p>
+    <div class="formula">
+
+  \( z^n = r^n (\cos(n\theta) + i \sin(n\theta)) \)
+</div>
+  <p>Juga digunakan untuk mencari akar-akar pangkat \( n \) dari suatu bilangan kompleks.</p>   
+          <p>Demikian pula, ∂f/∂y merepresentasikan kemiringan garis singgung pada kurva perpotongan dengan bidang x = a.</p>
+          </div>
+        </section>
+        <section id="video" class="section">
+
+<div class="example">
+<h2><i class="fas fa-video"></i>Video Pembelajaran Bilangan Kompleks</h2>
+  <div class="video-grid">
+
+<iframe width="410px" height="auto" src="https://www.youtube.com/embed/videoseries?si=etH0xcvvqtAGFD0Z&amp;list=PLmOc36chIAohXV-D_jPZs74MkFnChQxDr" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+      </div>
+        <div class="con-kuis">
+                  <p>Yuk, kita cek sejauh mana kamu paham! Klik tombol di bawah untuk mulai kuisnya.</p>
+
+          <a href="SOALMATERI1.html" class="btn-kuis">Mulai Kuis!
+          </a>
+
+
+</div>
+</div>
+</section>
+
+  <div class="navigation-buttons" style=" margin-right: auto; justify-content: right;">
+        
+           <a href="integral_tak_wajar.html" class="btn-anim">
+            Materi Selanjutnya <i class="fas fa-arrow-right"></i>
+          </a>
+
+        </div>
+  </div>
+   <div data-aos="fade" class="sidebar">
+        <div style="overflow-y: auto;  max-height: 80vh;" class="sidebar-menu responsive-sidebar" id="responsiveMenu">
+          <h3><i class="fas fa-list-ul"></i> Daftar Isi</h3>
+<a href="#pengantar">Mengapa Butuh Bilangan Kompleks?</a><br>
+<a href="#pengertian">Pengertian Bilangan Kompleks</a><br>
+<a href="#operasi">Operasi Dasar Pada Bilangan Kompleks</a><br>
+<a href="#konjugat">Konjugat dan Modulus</a><br>
+<a href="#representasi">Representasi di Bidang Kompleks</a><br>
+<a href="#polar">Bentuk Polar dan Bentuk Euler</a><br>
+<a href="#teorema">Teorema De Moivre</a><br>
+<a href="#video">Video Pembelajaran</a><br>
+
+        </div>
+      </div>
+</div>
+
+</div>
+
+
+<script type="text/javascript" src="script.js"></script>
+<div class="team-container">
+    <div class="team-member">
+        <img src="nanda.jpg" alt="Anggota 1">
+        <h3>Nanda Raissa</h3>
+        <p>247006111108</p>
+        <div class="social-links">
+            <a href="https://www.instagram.com/nanda_rsa?igsh=ajhxcXB1cHd0azlw" target="_blank">
+                <i class="fab fa-instagram"></i>
+            </a>
+        </div>
+    </div>
+
+    <div class="team-member">
+        <img src="annisa3.jpg" alt="Anggota 1">
+        <h3>Annisa Safira Wibowo</h3>
+        <p>247006111101</p>
+        <div class="social-links">
+            <a href="https://www.instagram.com/dfaviera?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank">
+                <i class="fab fa-instagram"></i>
+            </a>
+        </div>
+    </div>
+
+    <div class="team-member">
+        <img src="agniya.jpg" alt="Anggota 1">
+        <h3>Agniya Azzahra</h3>
+        <p>247006111090</p>
+        <div class="social-links">
+            <a href="https://www.instagram.com/qubialy_/?utm_source=ig_web_button_share_sheet" target="_blank">
+                <i class="fab fa-instagram"></i>
+            </a>
+
+        </div>
+    </div>
+
+    <div class="team-member">
+        <img src="diyani.jpg" alt="Anggota 1">
+        <h3>Diyani Rahayu Nur'aeni</h3>
+        <p>247006111115</p>
+        <div class="social-links">
+            <a href="https://www.instagram.com/dyanryn_?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank">
+                <i class="fab fa-instagram"></i>
+            </a>
+        </div>
+    </div>
+  </div>
+</div>
+
+<script >
+    // Dropdown Desktop Toggle
+const dropdownBtn = document.querySelector('.dropdown-btn');
+const desktopDropdown = document.getElementById('desktopDropdown');
+
+dropdownBtn.addEventListener('click', (e) => {
+  e.stopPropagation();
+  desktopDropdown.classList.toggle('show');
+});
+
+// Close dropdown when clicking outside
+document.addEventListener('click', () => {
+  desktopDropdown.classList.remove('show');
+});
+
+// Mobile Menu Toggle
+const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+const mobileDropdown = document.getElementById('mobileDropdown');
+
+mobileMenuBtn.addEventListener('click', (e) => {
+  e.stopPropagation();
+  mobileDropdown.classList.toggle('active');
+});
+
+// Close mobile dropdown when clicking outside
+document.addEventListener('click', (e) => {
+  if (!mobileMenuBtn.contains(e.target) {
+    mobileDropdown.classList.remove('active');
+  }
+});
+
+// Smooth scroll for all links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function(e) {
+    e.preventDefault();
+    
+    const targetId = this.getAttribute('href');
+    if (targetId === '#') return;
+    
+    const targetElement = document.querySelector(targetId);
+    if (targetElement) {
+      // Close all dropdowns
+      desktopDropdown.classList.remove('show');
+      mobileDropdown.classList.remove('active');
+      
+      // Smooth scroll
+      targetElement.scrollIntoView({
+        behavior: 'smooth'
+      });
+    }
+  });
+});
+  </script>
+<script src="https://kit.fontawesome.com/a076d05399.js"></script>
+
+<footer class="footer">
+    <div class="footer-content">
+        <div class="footer-logo font">
+           <b><span style="color: white; font-family: 'Playfair Display', serif; font-size: 25px; vertical-align: 8px;">Calculzy</span></b>
+
+        </div>
+
+    <div class="footer-bottom center flex">
+        <p>&copy; 2025 Kelompok Calculzy | Universitas Siliwangi.</p>
+    </div>
+  </div>
+</footer>
+
+
+</body>
+</html>

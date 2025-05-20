@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Kuis Integral Tak Wajar</title>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async
+          src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-color: #ffffff;
+      --container-color: #f1f5f9;
+      --text-color: #1e293b;
+      --card-color: #e2e8f0;
+      --highlight-color: #6366f1;
+      --secondary-color: #334155;
+      --title-color: #2563eb;
+      --mathjax-color: black;
+    }
+
+    body.dark {
+      --bg-color: #0f172a;
+      --container-color: #1e293b;
+      --text-color: #e2e8f0;
+      --card-color: #334155;
+      --highlight-color: #6366f1;
+      --secondary-color: #475569;
+      --title-color: #93c5fd;
+      --mathjax-color: white;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      margin: 0;
+      min-height: 100vh;
+      padding: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    .container {
+      max-width: 700px;
+      width: 100%;
+      background-color: var(--container-color);
+      border-radius: 1rem;
+      padding: 2rem;
+      box-shadow: 0 0 20px rgba(0,0,0,0.2);
+      position: relative;
+      overflow-y: auto;
+      max-height: 100vh;
+    }
+
+    h1, h2 {
+      text-align: center;
+      color: var(--title-color);
+      margin-top: 0;
+    }
+
+    .question {
+      background-color: var(--card-color);
+      border-radius: 0.75rem;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      text-align: left;
+    }
+
+    .question p {
+      font-size: 1.1rem;
+      margin-bottom: 1rem;
+      text-align: left;
+    }
+
+    label {
+      display: block;
+      margin: 0.5rem 0;
+      padding: 0.5rem;
+      background-color: var(--secondary-color);
+      border-radius: 0.5rem;
+      transition: background-color 0.2s;
+      cursor: pointer;
+      color: white;
+      word-wrap: break-word;
+      white-space: normal;
+    }
+
+    label:hover {
+      background-color: var(--highlight-color);
+    }
+
+    .btn {
+      padding: 0.6rem 1.5rem;
+      background-color: var(--highlight-color);
+      color: white;
+      border: none;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      display: block;
+      margin: 1rem auto 0;
+      font-weight: 600;
+    }
+
+    #timer {
+      font-weight: bold;
+      color: #facc15;
+      text-align: right;
+      margin-bottom: 1rem;
+    }
+
+    #result {
+      text-align: center;
+      font-size: 1.2rem;
+      margin-top: 2rem;
+      color: #38bdf8;
+    }
+
+    .explanation {
+      background-color: var(--card-color);
+      padding: 1.5rem;
+      margin-top: 2rem;
+      border-radius: 0.75rem;
+      max-height: 300px;
+      overflow-y: auto;
+    }
+
+    .explanation h3 {
+      margin-top: 0;
+      margin-bottom: 1rem;
+      color: #facc15;
+    }
+
+    .explanation ul {
+      list-style-type: none;
+      padding-left: 0;
+    }
+
+    .explanation li {
+      margin-bottom: 1rem;
+      line-height: 1.6;
+      color: var(--text-color);
+      border-bottom: 1px solid #cbd5e1;
+      padding-bottom: 1rem;
+      font-size: 1rem;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .start-screen {
+      text-align: center;
+    }
+
+    .start-screen h2 {
+      font-size: 1.8rem;
+      color: #facc15;
+      margin-bottom: 1rem;
+    }
+
+    mjx-container[jax="CHTML"] {
+      color: var(--mathjax-color) !important;
+    }
+
+    /*.theme-toggle {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--text-color);
+      transition: color 0.3s;
+    }*/
+
+   /* Default untuk Laptop/Web */
+.theme-toggle {
+  position: absolute;
+  top: 1rem;
+  right: 0rem;
+  background-color: var(--container-color);
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: var(--text-color);
+  padding: 0.3rem 0.5rem;
+  border-radius: 0.5rem;
+  z-index: 10;
+}
+
+
+
+/* Tablet */
+@media (max-width: 768px) {
+  .theme-toggle {
+    font-size: 1.3rem;
+    padding: 0.3rem 0.5rem;
+    top: 0.8rem;
+    right: 0.8rem;
+  }
+}
+
+/* Smartphone */
+@media (max-width: 480px) {
+  .theme-toggle {
+    font-size: 1.1rem;
+    padding: 0.2rem 0.4rem;
+    top: 0.6rem;
+    right: 0.6rem;
+  }
+  mjx-math {
+    font-size: 16px!important;
+    white-space: normal!important;
+  }
+
+.question {
+    padding: 1rem 10px!important ;
+}
+}
+
+    }
+  </style>
+</head>
+<body class="dark">
+  <div class="container">
+    <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
+
+    <div id="startScreen" class="start-screen">
+      <h2>SIAP MENGERJAKAN QUIZ INTEGRAL TAK WAJAR</h2>
+      <p>Klik tombol di bawah ini untuk memulai kuis.</p>
+      <button class="btn" onclick="startQuiz()">Mulai Kuis</button>
+    </div>
+
+    <div id="quizContent" class="hidden">
+      <h1>Kuis Integral Tak Wajar</h1>
+      <div id="timer">Waktu: 90 detik</div>
+      <div class="question" id="questionContainer"></div>
+      <button class="btn" onclick="nextQuestion()">Berikutnya</button>
+      <div id="result"></div>
+      <div id="explanations" class="explanation hidden">
+        <h3>Penjelasan Jawaban:</h3>
+        <ul id="explanationList"></ul>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const questions = [
+      {
+        qText: "Evaluasi integral tak wajar berikut:",
+        qMath: "\( \\int_{1}^{\\infty} \\frac{1}{x^2} dx \)",
+        options: ["Konvergen, hasilnya 1", "Divergen", "Konvergen, hasilnya 0", "Konvergen, hasilnya \\( \\infty \\)"],
+        correct: "a",
+        explanation: "Integral \\( \\int_{1}^{\\infty} \\frac{1}{x^2} dx = \\lim_{b \\to \\infty} [-1/x]_1^b = 1 \\)."
+      },
+      {
+        qText: "Evaluasi integral berikut:",
+        qMath: "\( \\int_{0}^{1} \\frac{1}{\\sqrt{x}} dx \)",
+        options: ["Konvergen, hasilnya 2", "Divergen", "Konvergen, hasilnya 1", "Konvergen, hasilnya \\( \\infty \\)"],
+        correct: "a",
+        explanation: "Integral \\( \\int_{0}^{1} x^{-1/2} dx = [2x^{1/2}]_0^1 = 2 \\)."
+      },
+      {
+        qText: "Tentukan apakah integral berikut konvergen atau divergen:",
+        qMath: "\( \\int_{0}^{\\infty} \\frac{1}{x+1} dx \)",
+        options: ["Konvergen", "Divergen", "Konvergen, hasil 1", "Tidak dapat ditentukan"],
+        correct: "b",
+        explanation: "\\( \\int_{0}^{\\infty} \\frac{1}{x+1} dx = \\ln(x+1) \\to \\infty \\), jadi divergen."
+      },
+      {
+        qText: "Apakah \\( \\int_{1}^{\\infty} \\frac{\\ln x}{x^2} dx \\) konvergen?",
+        qMath: "",
+        options: ["Ya, konvergen", "Tidak, divergen", "Konvergen bersyarat", "Tidak dapat ditentukan"],
+        correct: "a",
+        explanation: "Gunakan substitusi atau integrasi parsial, hasilnya konvergen dan bernilai 1."
+      },
+      {
+        qText: "Evaluasi integral tak wajar berikut:",
+        qMath: "\( \\int_{0}^{\\infty} e^{-x} dx \)",
+        options: ["1", "0", "Tak hingga", "Tidak terdefinisi"],
+        correct: "a",
+        explanation: "\\( \\int_{0}^{\\infty} e^{-x} dx = [-e^{-x}]_0^{\\infty} = 1 \\)."
+      }
+    ];
+
+    let current = 0;
+    let score = 0;
+    let timer;
+    let timeLeft = 90;
+
+    const timerElement = document.getElementById("timer");
+    const questionContainer = document.getElementById("questionContainer");
+    const result = document.getElementById("result");
+    const explanations = document.getElementById("explanations");
+    const explanationList = document.getElementById("explanationList");
+
+    function startQuiz() {
+      document.getElementById("startScreen").classList.add("hidden");
+      document.getElementById("quizContent").classList.remove("hidden");
+      loadQuestion();
+    }
+
+    function startTimer() {
+      clearInterval(timer);
+      timeLeft = 90;
+      timerElement.textContent = `Waktu: ${timeLeft} detik`;
+      timer = setInterval(() => {
+        timeLeft--;
+        timerElement.textContent = `Waktu: ${timeLeft} detik`;
+        if (timeLeft <= 0) {
+          clearInterval(timer);
+          nextQuestion();
+        }
+      }, 1000);
+    }
+
+    function loadQuestion() {
+      const q = questions[current];
+      let html = `<p><strong>${current + 1}. ${q.qText}</strong></p>`;
+      if (q.qMath) html += `<p>\\(${q.qMath}\\)</p>`;
+      q.options.forEach((opt, idx) => {
+        const letter = String.fromCharCode(97 + idx);
+        html += `<label><input type="radio" name="q${current}" value="${letter}"> ${letter}. ${opt}</label>`;
+      });
+      questionContainer.innerHTML = `<div class="question">${html}</div>`;
+      MathJax.typeset();
+      startTimer();
+    }
+
+    function nextQuestion() {
+      clearInterval(timer);
+      const selected = document.querySelector(`input[name="q${current}"]:checked`);
+      const correct = questions[current].correct;
+      if (selected && selected.value === correct) score++;
+
+      explanationList.innerHTML += `<li><strong>${current + 1}. ${correct}.</strong> ${questions[current].explanation}</li>`;
+      current++;
+      if (current < questions.length) {
+        loadQuestion();
+      } else {
+        showResult();
+      }
+    }
+
+    function showResult() {
+      questionContainer.innerHTML = '';
+      document.querySelector('.btn').style.display = 'none';
+      result.innerHTML = `Skor akhir kamu: <strong>${score} / ${questions.length}</strong>`;
+      explanations.classList.remove("hidden");
+      timerElement.textContent = "";
+      MathJax.typeset();
+    }
+
+    function toggleTheme() {
+      document.body.classList.toggle('dark');
+      const btn = document.querySelector('.theme-toggle');
+      btn.textContent = document.body.classList.contains('dark') ? '🌙' : '☀️';
+      MathJax.typeset();
+    }
+  </script>
+</body>
+</html>
